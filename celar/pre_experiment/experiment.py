@@ -354,7 +354,7 @@ def _report(
 
 
 def run_experiment(config: ExperimentConfig) -> Path:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     output_dir = Path(config.output_dir)
     if not output_dir.is_absolute():
         output_dir = root / output_dir

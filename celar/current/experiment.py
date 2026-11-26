@@ -18,10 +18,14 @@ import pandas as pd
 import torch
 
 from .config import ExperimentConfig
-from .data import MORPHOLOGIES, make_pairs, source_digest
+from .data import (
+    MORPHOLOGIES,
+    load_c0_dataset,
+    make_pairs,
+    source_digest,
+)
 from .metrics import bootstrap_mean_ci, evaluate_latent_model, paired_difference
 from .models import TrainedLatentModel
-from .sim_data import load_c0_dataset
 from .training import LATENT_METHODS, train_latent_models
 
 
@@ -223,7 +227,7 @@ def _report(
 
 
 def run_sim_c1(config: ExperimentConfig) -> Path:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     output_dir = Path(config.output_dir)
     if not output_dir.is_absolute():
         output_dir = root / output_dir

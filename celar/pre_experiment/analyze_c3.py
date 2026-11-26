@@ -209,7 +209,7 @@ def main() -> None:
     parser.add_argument("--source", default="results/celar_value_v3")
     parser.add_argument("--output", default="results/celar_v3_group_analysis")
     args = parser.parse_args()
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     run_analysis(
         root / args.config,
         root / args.source,

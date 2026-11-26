@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from celar.config import DataConfig
-from celar.data import (
+from celar.pre_experiment.config import DataConfig
+from celar.pre_experiment.data import (
     CONTEXT_DIM,
     MORPHOLOGIES,
     generate_dataset,

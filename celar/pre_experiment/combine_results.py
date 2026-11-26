@@ -169,7 +169,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Combine CELAR project-stage results")
     parser.add_argument("--output", default="results/celar_combined_v1")
     args = parser.parse_args()
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     output_dir = root / args.output
     combine(root, output_dir)
     print(f"CELAR combined results written to {output_dir.resolve()}")

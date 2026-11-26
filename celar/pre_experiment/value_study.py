@@ -100,7 +100,7 @@ def _make_curves_plot(curves: pd.DataFrame, output_dir: Path) -> None:
 def run_c2_study(config: ExperimentConfig) -> Path:
     """Train and evaluate only the longer behavior-cloning comparison."""
 
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     output_dir = Path(config.output_dir)
     if not output_dir.is_absolute():
         output_dir = root / output_dir
@@ -336,7 +336,7 @@ def _markdown_report(
 
 
 def run_value_study(config: ExperimentConfig) -> Path:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     output_dir = Path(config.output_dir)
     if not output_dir.is_absolute():
         output_dir = root / output_dir

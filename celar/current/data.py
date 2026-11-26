@@ -7,12 +7,87 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .data import MAX_ACTION_DIM, MORPHOLOGIES, Dataset, Sample
-
-
 ROBOT_TO_BODY = {"panda": 0, "ur5e": 1, "sawyer": 2}
 TASK_FAMILIES = ("pick", "place", "open_drawer", "push")
 SIM_CONTEXT_DIM = 1061
+MAX_ACTION_DIM = 8
+GRIPPER_ACTION_INDEX = 7
+
+
+@dataclass(frozen=True)
+class Morphology:
+    name: str
+    action_dim: int
+    joint_count: int
+    velocity_limit: float
+    reach: float
+    payload: float
+    control_hz: float
+
+    @property
+    def descriptor(self) -> np.ndarray:
+        return np.asarray(
+            [
+                self.joint_count / 10.0,
+                self.reach,
+                self.velocity_limit,
+                self.payload,
+                self.control_hz / 100.0,
+            ],
+            dtype=np.float32,
+        )
+
+
+MORPHOLOGIES = (
+    Morphology("franka_panda", 7, 7, 0.78, 0.86, 0.72, 20.0),
+    Morphology("ur5e", 6, 6, 0.84, 0.92, 0.58, 18.0),
+    Morphology("sawyer", 7, 7, 0.72, 0.80, 0.63, 16.0),
+)
+
+
+@dataclass
+class Sample:
+    body_index: int
+    pair_id: str
+    episode_id: str
+    task_id: str
+    trajectory_id: str
+    window_index: int
+    native_action: np.ndarray
+    action_mask: np.ndarray
+    context: np.ndarray
+    morphology: np.ndarray
+    semantic_action: np.ndarray
+    progress: float
+    success: float
+
+
+@dataclass
+class Dataset:
+    catalog: dict[str, list[object]]
+    train: list[Sample]
+    val: list[Sample]
+    test: list[Sample]
+    protocol: dict[str, object]
+
+
+@dataclass
+class PairBatch:
+    native: np.ndarray
+    action_mask: np.ndarray
+    context: np.ndarray
+    morphology: np.ndarray
+    body_index: np.ndarray
+    semantic: np.ndarray
+    progress: np.ndarray
+    success: np.ndarray
+    pair_ids: list[str]
+    episode_ids: list[str]
+    task_ids: list[str]
+    window_indices: np.ndarray
+
+    def __len__(self) -> int:
+        return int(self.native.shape[0])
 
 
 def _downsample(value: np.ndarray, output_size: int = 16) -> np.ndarray:
@@ -179,6 +254,8 @@ def load_c0_dataset(
                 padded[: native.shape[0], : native.shape[1]] = native
                 mask = np.zeros_like(padded)
                 mask[: native.shape[0], : native.shape[1]] = 1.0
+                padded[: native.shape[0], GRIPPER_ACTION_INDEX] = gripper
+                mask[: native.shape[0], GRIPPER_ACTION_INDEX] = 1.0
                 # Each embodiment derives semantics from its own executed EEF
                 # displacement and gripper command. Nothing is copied from body 0.
                 semantic = _canonical_semantic_window(
@@ -251,10 +328,6 @@ def load_c0_dataset(
             + len(split_sets["val"] & split_sets["test"])
         )
     # Every pair must be represented by all three embodiments in every split.
-    pair_body_counts: dict[str, int] = {}
-    for sample in [*train, *val, *test]:
-        key = sample.pair_id
-        pair_body_counts[key] = pair_body_counts.get(key, 0)
     actual_pair_bodies: dict[str, set[int]] = {}
     for sample in [*train, *val, *test]:
         actual_pair_bodies.setdefault(sample.pair_id, set()).add(sample.body_index)
@@ -328,3 +401,137 @@ def load_c0_dataset(
         ),
         manifest,
     )
+
+
+def _common_pair_ids(
+    samples: list[Sample],
+    bodies: tuple[int, ...],
+) -> list[str]:
+    required = set(bodies)
+    present: dict[str, set[int]] = {}
+    for sample in samples:
+        if sample.body_index in required:
+            present.setdefault(sample.pair_id, set()).add(sample.body_index)
+    return sorted(
+        pair_id
+        for pair_id, body_set in present.items()
+        if body_set == required
+    )
+
+
+def make_pairs(
+    samples: list[Sample],
+    bodies: tuple[int, ...] = (0, 1, 2),
+    *,
+    limit: int | None = None,
+    seed: int = 0,
+) -> PairBatch:
+    body_list = tuple(int(body) for body in bodies)
+    if len(body_list) < 2:
+        raise ValueError("At least two bodies are required")
+    pair_ids = _common_pair_ids(samples, body_list)
+    if limit is not None and len(pair_ids) > limit:
+        rng = np.random.default_rng(seed)
+        selected = np.sort(rng.choice(len(pair_ids), size=limit, replace=False))
+        pair_ids = [pair_ids[int(index)] for index in selected]
+    lookup = {
+        (sample.pair_id, sample.body_index): sample
+        for sample in samples
+        if sample.body_index in body_list
+    }
+    return PairBatch(
+        native=np.stack(
+            [
+                np.stack(
+                    [lookup[(pair_id, body)].native_action for body in body_list]
+                )
+                for pair_id in pair_ids
+            ]
+        ).astype(np.float32),
+        action_mask=np.stack(
+            [
+                np.stack(
+                    [lookup[(pair_id, body)].action_mask for body in body_list]
+                )
+                for pair_id in pair_ids
+            ]
+        ).astype(np.float32),
+        context=np.stack(
+            [
+                np.stack(
+                    [lookup[(pair_id, body)].context for body in body_list]
+                )
+                for pair_id in pair_ids
+            ]
+        ).astype(np.float32),
+        morphology=np.stack(
+            [
+                np.stack(
+                    [lookup[(pair_id, body)].morphology for body in body_list]
+                )
+                for pair_id in pair_ids
+            ]
+        ).astype(np.float32),
+        body_index=np.stack(
+            [
+                np.asarray(body_list, dtype=np.int64)
+                for _ in pair_ids
+            ]
+        ),
+        semantic=np.stack(
+            [
+                np.stack(
+                    [lookup[(pair_id, body)].semantic_action for body in body_list]
+                )
+                for pair_id in pair_ids
+            ]
+        ).astype(np.float32),
+        progress=np.stack(
+            [
+                np.asarray(
+                    [lookup[(pair_id, body)].progress for body in body_list],
+                    dtype=np.float32,
+                )
+                for pair_id in pair_ids
+            ]
+        ),
+        success=np.stack(
+            [
+                np.asarray(
+                    [lookup[(pair_id, body)].success for body in body_list],
+                    dtype=np.float32,
+                )
+                for pair_id in pair_ids
+            ]
+        ),
+        pair_ids=pair_ids,
+        episode_ids=[
+            lookup[(pair_id, body_list[0])].episode_id for pair_id in pair_ids
+        ],
+        task_ids=[
+            lookup[(pair_id, body_list[0])].task_id for pair_id in pair_ids
+        ],
+        window_indices=np.stack(
+            [
+                np.asarray(
+                    [
+                        lookup[(pair_id, body)].window_index
+                        for body in body_list
+                    ],
+                    dtype=np.int64,
+                )
+                for pair_id in pair_ids
+            ]
+        ),
+    )
+
+
+def source_digest(root: str | Path) -> str:
+    import hashlib
+
+    digest = hashlib.sha256()
+    package_root = Path(root) / "celar" / "current"
+    for path in sorted(package_root.glob("*.py")):
+        digest.update(path.name.encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()

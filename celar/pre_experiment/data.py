@@ -1,3 +1,6 @@
+"""
+数据定义、合成数据生成和配对操作模块
+"""
 from __future__ import annotations
 
 import hashlib
@@ -698,7 +701,7 @@ def safety_clip(native: np.ndarray, body_index: int) -> tuple[np.ndarray, np.nda
 
 def source_digest(root: str | Path) -> str:
     digest = hashlib.sha256()
-    package_root = Path(root) / "celar"
+    package_root = Path(root) / "celar" / "pre_experiment"
     for path in sorted(package_root.glob("*.py")):
         digest.update(path.name.encode("utf-8"))
         digest.update(path.read_bytes())

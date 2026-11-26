@@ -4,11 +4,11 @@ from dataclasses import replace
 
 import numpy as np
 
-from celar.config import DataConfig, ExperimentConfig, ModelConfig
-from celar.data import generate_dataset, make_pairs
-from celar.metrics import evaluate_latent_model
-from celar.training import _adjacent_sample_pairs, train_latent_models
-from celar.rl import CrossEmbodimentControlEnv, train_ppo
+from celar.pre_experiment.config import DataConfig, ExperimentConfig, ModelConfig
+from celar.pre_experiment.data import generate_dataset, make_pairs
+from celar.pre_experiment.metrics import evaluate_latent_model
+from celar.pre_experiment.training import _adjacent_sample_pairs, train_latent_models
+from celar.pre_experiment.rl import CrossEmbodimentControlEnv, train_ppo
 
 
 def test_celar_training_and_metrics_are_deterministic() -> None:
