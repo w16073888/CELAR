@@ -25,7 +25,7 @@
 ## C1
 
 正式报告：
-[`results/c1_mujoco_v6/README.md`](results/c1_mujoco_v6/README.md)
+[`results/c1_mujoco_v7/README.md`](results/c1_mujoco_v7/README.md)
 
 | 指标 | CELAR | 共享 AE |
 |---|---:|---:|
@@ -58,6 +58,10 @@ Semantic R@1 已接近饱和，当前主要区分指标为 exact-pair retrieval�
 - outcome 损失使用逐样本 progress MSE + 同 pair 三本体预测方差；
 - smoothing 只使用同一 episode/body 的 `window_t -> window_t+1`；
 - usage 损失使用方差目标和相关性白化，避免 latent collapse。
+- `celar_no_align` 只关闭 alignment；其训练历史中 alignment=0、smooth 仍为正，
+  不再误删平滑损失；
+- C1 loader 的动作 padding/semantic window 长度来自 `data.chunk_length`；
+- current 默认输出目录为 `results/c1_mujoco_v7`。
 
 ## 代码边界
 

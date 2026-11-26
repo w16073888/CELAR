@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "pair_overlap_count": 0,
+  "task_overlap_count": 0,
+  "scene_overlap_count": 0,
+  "incomplete_pairs": [],
+  "canonical_semantic_mismatch_count": 0,
+  "split_counts": {
+    "train_samples": 6720,
+    "val_samples": 1440,
+    "test_samples": 1440,
+    "train_pairs": 280,
+    "val_pairs": 60,
+    "test_pairs": 60
+  },
+  "body_counts": {
+    "train": {
+      "franka_panda": 2240,
+      "ur5e": 2240,
+      "sawyer": 2240
+    },
+    "val": {
+      "franka_panda": 480,
+      "ur5e": 480,
+      "sawyer": 480
+    },
+    "test": {
+      "franka_panda": 480,
+      "ur5e": 480,
+      "sawyer": 480
+    }
+  },
+  "dimensions": {
+    "context": [
+      1061
+    ],
+    "native_action": [
+      [
+        8,
+        8
+      ]
+    ],
+    "semantic_action": [
+      [
+        8,
+        4
+      ]
+    ]
+  },
+  "chunk_length": 8
+}

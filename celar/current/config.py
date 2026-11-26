@@ -39,7 +39,7 @@ class EvaluationConfig:
 
 @dataclass
 class ExperimentConfig:
-    output_dir: str = "results/c1_mujoco_v4"
+    output_dir: str = "results/c1_mujoco_v7"
     c0_data_dir: str = "results/c0_mujoco_v1"
     data: DataConfig = field(default_factory=DataConfig)
     model: ModelConfig = field(default_factory=ModelConfig)
@@ -69,7 +69,7 @@ def load_config(path: str | Path | None = None) -> ExperimentConfig:
     if unknown:
         raise ValueError(f"Unknown current CELAR fields: {sorted(unknown)}")
     return ExperimentConfig(
-        output_dir=str(raw.get("output_dir", "results/c1_mujoco_v4")),
+        output_dir=str(raw.get("output_dir", "results/c1_mujoco_v7")),
         c0_data_dir=str(raw.get("c0_data_dir", "results/c0_mujoco_v1")),
         data=_merge_known(DataConfig, raw.get("data")),
         model=_merge_known(ModelConfig, raw.get("model")),

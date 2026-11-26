@@ -239,7 +239,10 @@ def run_sim_c1(config: ExperimentConfig) -> Path:
         c0_dir = root / c0_dir
     started = time.perf_counter()
     print(f"[C1] loading formal C0 data from {c0_dir}")
-    dataset, c0_manifest = load_c0_dataset(c0_dir)
+    dataset, c0_manifest = load_c0_dataset(
+        c0_dir,
+        chunk_length=config.data.chunk_length,
+    )
     test_pairs = make_pairs(
         dataset.test,
         ALL_BODIES,

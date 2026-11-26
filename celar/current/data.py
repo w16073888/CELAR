@@ -170,6 +170,7 @@ def _canonical_semantic_window(
     object_position: np.ndarray,
     goal_position: np.ndarray,
     initial_eef: np.ndarray,
+    chunk_length: int,
 ) -> np.ndarray:
     """Shared task-stage action distilled only from the common scene semantics."""
 
@@ -182,7 +183,7 @@ def _canonical_semantic_window(
 
     object_direction = direction(initial_eef, object_position) * 0.05
     goal_direction = direction(initial_eef, goal_position) * 0.05
-    window = np.zeros((8, 4), dtype=np.float32)
+    window = np.zeros((int(chunk_length), 4), dtype=np.float32)
     if task_family == "pick":
         movement = object_direction if chunk_index < 4 else np.asarray(
             [0.0, 0.0, 0.05], dtype=np.float32
@@ -210,6 +211,8 @@ def _canonical_semantic_window(
 
 def load_c0_dataset(
     root: str | Path,
+    *,
+    chunk_length: int = 8,
 ) -> tuple[Dataset, pd.DataFrame]:
     """Load formal C0 trajectories as genuine body-paired action windows."""
 
@@ -247,10 +250,17 @@ def load_c0_dataset(
                 gripper = np.asarray(
                     data["gripper_action"][chunk_index], dtype=np.float32
                 )
+                if native.shape[0] > chunk_length:
+                    raise ValueError(
+                        f"Configured chunk_length={chunk_length} is shorter than "
+                        f"{row.robot} recorded chunk length {native.shape[0]}"
+                    )
                 # C0 uses robot-specific chunks (4/6/8). C1 aligns the coarse
                 # chunk index to a padded length-8 tensor and masks missing
                 # substeps; no native action is fabricated.
-                padded = np.zeros((8, MAX_ACTION_DIM), dtype=np.float32)
+                padded = np.zeros(
+                    (int(chunk_length), MAX_ACTION_DIM), dtype=np.float32
+                )
                 padded[: native.shape[0], : native.shape[1]] = native
                 mask = np.zeros_like(padded)
                 mask[: native.shape[0], : native.shape[1]] = 1.0
@@ -264,6 +274,7 @@ def load_c0_dataset(
                     object_position=object_position,
                     goal_position=goal_position,
                     initial_eef=initial_eef,
+                    chunk_length=chunk_length,
                 )
                 context = _sim_context(
                     frame_index=chunk_index,
@@ -388,6 +399,7 @@ def load_c0_dataset(
                 {sample.semantic_action.shape for sample in samples_by_split["train"]}
             ),
         },
+        "chunk_length": int(chunk_length),
     }
     if not protocol["passed"]:
         raise RuntimeError(f"Formal C0 pairing protocol failed: {protocol}")

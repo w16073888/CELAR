@@ -1,0 +1,69 @@
+{
+  "config": {
+    "output_dir": "results/c1_mujoco_v7",
+    "c0_data_dir": "results/c0_mujoco_v1",
+    "data": {
+      "chunk_length": 8
+    },
+    "model": {
+      "hidden_dim": 96,
+      "latent_dim": 8,
+      "epochs": 45,
+      "batch_size": 128,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "align_weight": 0.65,
+      "cycle_weight": 0.2,
+      "outcome_weight": 0.2,
+      "smooth_weight": 0.06,
+      "usage_weight": 1.0,
+      "reconstruction_weight": 1.0,
+      "pair_margin": 0.1
+    },
+    "evaluation": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "bootstrap_samples": 3000,
+      "retrieval_candidates": 60,
+      "executable_semantic_tolerance": 0.34
+    }
+  },
+  "c0_manifest_rows": 1200,
+  "source_sha256": "517314d8017443eba263e5b63864c58cf169ad5e4cabdf2128ee5959313b6fd2",
+  "checkpoint_sha256": {
+    "independent_ae/seed_0": "b9e34e2a609f357139519faa9f0efeb31e1adbb1f9400f161fad01435ea11e6d",
+    "shared_ae/seed_0": "bec46c24fd16047bf9eccca883fd382a72f51a361204be5e088d508938e44d19",
+    "celar_no_align/seed_0": "2832b9e27d22882b6e88edcd63411a469a4fb2970a199e56fcc779bfed9e5bf3",
+    "celar_no_cycle/seed_0": "581aae8f1445b05708f9bfad75ff30453a1ca2e8e7bbc78cea981eb93be2f6a4",
+    "celar_no_outcome/seed_0": "cd672812ca9421109478be234e3f9f2bda994f134fe2a67ae4d1fa5b1f04ee82",
+    "celar_shuffled/seed_0": "bde4e494fe6256987debdc0a21461f9b6ddaa89029c3ea68bfab015af3783e95",
+    "celar/seed_0": "b542a7dcb71b102f1e8527f606cc851f7977e073d1742eb3e05121ff4c5767d0",
+    "independent_ae/seed_1": "97807aaaca4cd79c6cb078360321b26cad539361583ce15319d237daff61774d",
+    "shared_ae/seed_1": "0ad74adc6eb33f699d30f2b200b0acd16909f03d49d10c3f233497a6a753a614",
+    "celar_no_align/seed_1": "cba23613c10cbea784cd225729965ce3246994cae7b44cb258e3f5058613f4ab",
+    "celar_no_cycle/seed_1": "dcc830c0d1ed9658f35d0cc9d47b45e328babfe46069f0124ef6c3ef20ef86b2",
+    "celar_no_outcome/seed_1": "af282e5e6f58271c0b77d16d8c2ed07098d4ff4f94e35f53c48e480a213d8b9c",
+    "celar_shuffled/seed_1": "cc35c38e3051d211c3bb13632ce413def4fdb5b98422f06c7ce6ef3c19c46924",
+    "celar/seed_1": "38a2e46b3c68f04bda6f3dbc0b0b3f0e73fade45c79b40145bf88c81d3025c36",
+    "independent_ae/seed_2": "4a9a3170635926f04d37727e5f9d7b69e5af20e3d4d68ed04d96f00b8162271f",
+    "shared_ae/seed_2": "4058c24ccda9d33264f2f0fc0205f554ea823d1d9504588481f5f4b399331118",
+    "celar_no_align/seed_2": "432d999e60a52c011ff4afb0c3e1957181fe36277719d7bfd32863e1ecf6314b",
+    "celar_no_cycle/seed_2": "98ee1ce1db1eaedbe79b8e8c160ac98be006d56fb37941eb762fa20402e38add",
+    "celar_no_outcome/seed_2": "8d53be1859255943ab96443da668d260cb5df4e144bc38530d2daaa0d95feae2",
+    "celar_shuffled/seed_2": "f558c4ea23c64264077a5e8868c5325290daee578443852a68ce0536c010e575",
+    "celar/seed_2": "9a69648825e4d7da27b9c92b06f725fc1b09b46ccc0573677f945979aadaa70f"
+  },
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "cpu_count": 8
+  },
+  "runtime_seconds": 184.7614853,
+  "scope": "formal_c0_mujoco_three_embodiment_c1",
+  "paper_grade": false
+}

@@ -4,16 +4,21 @@ from pathlib import Path
 
 import numpy as np
 
-from celar.current.config import ModelConfig
+from celar.current.config import ExperimentConfig, ModelConfig
 from celar.current.data import (
     GRIPPER_ACTION_INDEX,
     TASK_FAMILIES,
     Dataset,
     Sample,
+    _canonical_semantic_window,
     make_pairs,
 )
 from celar.current.metrics import evaluate_latent_model
-from celar.current.training import train_latent_models
+from celar.current.training import (
+    method_uses_alignment,
+    method_uses_smoothing,
+    train_latent_models,
+)
 
 
 def _current_sample(pair: int, body: int, window: int) -> Sample:
@@ -80,6 +85,39 @@ def test_current_package_has_only_four_task_schema() -> None:
     )
     assert "pre_experiment" not in source
     assert 'TASK_FAMILIES = ("pick", "place", "open")' not in source
+    assert ExperimentConfig().output_dir.endswith("c1_mujoco_v7")
+
+
+def test_configured_chunk_length_controls_semantic_window() -> None:
+    semantic = _canonical_semantic_window(
+        task_family="pick",
+        chunk_index=1,
+        object_position=np.asarray([0.1, 0.0, 0.45]),
+        goal_position=np.asarray([0.3, 0.0, 0.45]),
+        initial_eef=np.asarray([0.0, 0.0, 0.6]),
+        chunk_length=6,
+    )
+    assert semantic.shape == (6, 4)
+
+
+def test_no_align_keeps_smoothing() -> None:
+    assert not method_uses_alignment("celar_no_align")
+    assert method_uses_smoothing("celar_no_align")
+    dataset = _current_dataset()
+    model = train_latent_models(
+        dataset.train,
+        bodies=(0, 1, 2),
+        method="celar_no_align",
+        cfg=ModelConfig(
+            hidden_dim=32,
+            latent_dim=8,
+            epochs=1,
+            batch_size=16,
+        ),
+        seed=7,
+    )
+    assert model.history[-1]["alignment"] == 0.0
+    assert model.history[-1]["smooth"] > 0.0
 
 
 def test_current_pairs_and_celar_training() -> None:

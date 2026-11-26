@@ -23,6 +23,16 @@ LATENT_METHODS = (
 )
 
 
+def method_uses_alignment(method: str) -> bool:
+    return method not in {"shared_ae", "celar_no_align"}
+
+
+def method_uses_smoothing(method: str) -> bool:
+    # shared_ae is the plain shared baseline. All CELAR ablations, including
+    # celar_no_align, keep the temporal smoothness objective.
+    return method != "shared_ae"
+
+
 def _fit_context_normalizer(samples: list[Sample]) -> Normalizer:
     return Normalizer.fit(np.stack([sample.context for sample in samples]))
 
@@ -151,7 +161,7 @@ def _train_shared(
             smooth = torch.zeros((), dtype=torch.float32)
             usage = _usage_loss(latent)
 
-            if method not in {"shared_ae", "celar_no_align"}:
+            if method_uses_alignment(method):
                 terms: list[torch.Tensor] = []
                 for left, right in combinations(range(len(bodies)), 2):
                     right_latent = latent_pairs[:, right]
@@ -204,7 +214,7 @@ def _train_shared(
             if (
                 cfg.smooth_weight > 0.0
                 and adjacent
-                and method not in {"shared_ae", "celar_no_align"}
+                and method_uses_smoothing(method)
             ):
                 smooth_count = min(len(adjacent), cfg.batch_size)
                 chosen = rng.choice(

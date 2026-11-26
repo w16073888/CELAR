@@ -9,9 +9,9 @@
 - `celar_sim/`：Panda、UR5e、Sawyer 的最小统一 MuJoCo 环境；
 - `celar/current/`：只读取正式 C0 数据，定义当前四任务、三本体 C1；
 - `configs/c0_mujoco.yaml`：1,200 条配对轨迹的 C0 正式配置；
-- `configs/c1_mujoco_v6.yaml`：C1 最终配置；
+- `configs/c1_mujoco_v7.yaml`：C1 最终配置；
 - `results/c0_mujoco_v1/`：正式 C0 数据和 `C0_PASS` 报告；
-- `results/c1_mujoco_v6/`：正式 C1 数据和 `C1_PASS` 报告。
+- `results/c1_mujoco_v7/`：正式 C1 数据和 `C1_PASS` 报告。
 
 当前任务只有：
 
@@ -31,7 +31,7 @@ Panda / UR5e / Sawyer
 cd attm5
 python -m pytest
 python -m celar_sim.cli --config configs/c0_mujoco.yaml
-python -m celar.cli --config configs/c1_mujoco_v6.yaml
+python -m celar.cli --config configs/c1_mujoco_v7.yaml
 ```
 
 当前 C1 完全从 C0 NPZ 加载：
