@@ -1,0 +1,104 @@
+CELAR: Cross-Embodiment Latent Action Reinforcement Learning with Executable Robot-Specific Decoders
+
+Paper Outline for an Approximately 1,000-Word Paper
+
+Abstract (120-150 words)
+State the problem: robot policies are embodiment-specific because arms differ in action dimensions, kinematics, and limits. Introduce CELAR, a shared latent action space with robot-specific executable decoders. Summarize the training objective and the main evidence: cross-embodiment action alignment, safe decoding, equal-budget PPO improvement, and few-shot decoder adaptation. End with the scope: results are pilot evidence and require vendor-grade multi-robot validation.
+
+1. Introduction (140-170 words)
+Explain why shared visual or language encoders do not solve cross-robot control. Present the central question: can action semantics be shared while native execution remains robot-specific? State the hypothesis and the three contributions: paired action alignment, safety-constrained robot-specific decoding, and improved policy-learning efficiency. Mention Panda, UR5e, and Sawyer, but do not review every experiment.
+[CITE: Open X-Embodiment / RT-X for cross-robot data and policy context.]
+
+2. Related Work (90-110 words)
+Briefly position the work relative to cross-embodiment policies, action autoencoders and VAEs, behavior cloning, and PPO. Emphasize the gap: existing methods usually share observations or policies but do not jointly verify semantic alignment, executable decoding, and online RL benefit.
+[CITE: ACT/action chunking; VAE; VQ-VAE; behavioral cloning; PPO.]
+
+3. Method (220-260 words)
+Define the robot-specific action chunk and morphology descriptor. Describe the encoder that maps observation, action chunk, and morphology into an 8-dimensional latent action. Explain the robot-specific decoder and safety projection.
+
+Describe the loss terms:
+- native-action reconstruction;
+- paired cross-embodiment alignment;
+- cycle consistency;
+- task-progress consistency;
+- temporal smoothness.
+
+[CITE: action-chunking Transformer (ACT) where action chunks are introduced.]
+[CITE: CycleGAN only for the general cycle-consistency idea; do not imply it is a robotics method.]
+
+Explain the RL interface: a high-level actor outputs latent actions while the pretrained decoder remains frozen. Add one short paragraph on decoder-aware latent behavior cloning and few-shot decoder adaptation for an unseen robot.
+[CITE: PPO for the policy optimizer.]
+
+4. Experimental Setup (110-140 words)
+Describe the three arms and four tasks: pick, place, open-drawer, and push. State the data split and paired-scene design. Report only the essential engineering evidence: 128×128 RGB-D, shared initial states, failure and perturbation trajectories, safety checks, and leakage checks.
+
+[CITE: MuJoCo for the physics engine.]
+[TOOL USED: MuJoCo. State the exact version and license in the implementation section.]
+
+Important attribution note: the current C0 arm assets are custom minimal kinematic MJCF models named after Panda, UR5e, and Sawyer. They are not official vendor models. If replaced by Robosuite or MuJoCo Menagerie assets, cite those projects and state the exact model source.
+
+List only the necessary comparisons:
+- native-action PPO;
+- shared action autoencoder;
+- CELAR without cross-embodiment alignment;
+- full CELAR.
+
+5. Results (190-230 words)
+Use three concise result paragraphs.
+
+Representation: report similar-action retrieval for CELAR versus the shared autoencoder and state whether decoded actions remain executable.
+
+Online learning: compare final success and steps to target success under equal PPO budgets. Include the shared-decoder baseline to show that the gain is not explained only by using a pretrained decoder.
+
+Adaptation: report the 5-shot and 20-shot decoder adaptation results for the held-out robot. Clearly distinguish decoder reconstruction from closed-loop policy transfer.
+
+6. Discussion and Limitations (110-140 words)
+Explain why separating shared semantics from native execution could reduce duplicated policy learning across robot families. Acknowledge that the current online outcomes come from a controlled proxy. State that the MuJoCo C0 environment uses simplified arm models, and that vendor-grade dynamics, external benchmarks, and real-robot tests remain necessary.
+
+7. Conclusion (50-70 words)
+Restate the core idea: shared latent action semantics plus robot-specific safe decoding. Summarize the pilot evidence without overclaiming. End with the next validation step: reproduce the main result using vendor-grade MuJoCo/Robosuite models and three seeds across four tasks.
+
+Estimated total: approximately 1,000 words, excluding title and references.
+
+References to place in the paper
+[A detailed bibliography should be added after the draft; the following are the required citation slots, not yet a complete bibliography.]
+
+Cross-embodiment data and policies:
+- Open X-Embodiment / RT-X papers.
+- One representative cross-embodiment policy paper, selected at drafting time.
+
+Action representation and imitation:
+- Kingma and Welling, Auto-Encoding Variational Bayes, 2014.
+- van den Oord et al., Neural Discrete Representation Learning, 2017.
+- Pomerleau, Efficient Training of Artificial Neural Networks for Autonomous Navigation, 1991.
+- Zhao et al., Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware, 2023 (ACT).
+
+Reinforcement learning:
+- Schulman et al., Proximal Policy Optimization Algorithms, 2017.
+
+Simulation and infrastructure:
+- Todorov et al., MuJoCo: A Physics Engine for Model-Based Control, 2012.
+- Zhu et al., robosuite: A Modular Simulation Framework and Benchmark for Robot Learning, 2020, if Robosuite models are used.
+
+Optional supporting citations:
+- He et al., Deep Residual Learning for Image Recognition, 2016, for the ResNet-18 memory probe.
+- Perez et al., FiLM: Visual Reasoning with a General Conditioning Layer, 2018, if morphology conditioning uses FiLM.
+- Holm, A Simple Sequentially Rejective Multiple Test Procedure, 1979, if Holm correction is used.
+- Efron, Bootstrap Methods: Another Look at the Jackknife, 1979, for bootstrap confidence intervals.
+
+Open-source tools used: attribution section
+
+The implementation section should include a short table with tool, version, purpose, license, and citation:
+
+- MuJoCo: physics simulation, rendering, RGB-D, robot-task environment; Apache-2.0; cite Todorov et al.
+- PyTorch: model implementation, training, PPO, memory probe; BSD-3-Clause; cite Paszke et al., 2019.
+- torchvision: ResNet-18 memory probe only; BSD-3-Clause.
+- NumPy: numerical arrays, trajectory processing, metrics; BSD-3-Clause.
+- pandas: manifest and result aggregation; BSD-3-Clause.
+- SciPy: statistical summaries; BSD-3-Clause.
+- Matplotlib: figures; Matplotlib License, BSD-compatible.
+- Pillow: image export and previews; HPND License.
+- PyYAML: configuration files; MIT License.
+- pytest: reproducibility and contract tests; MIT License.
+
+Do not cite Robosuite, LIBERO, DROID, CALVIN, or RoboTwin as tools used in the current study. They are optional future validation environments or related work until actually run.

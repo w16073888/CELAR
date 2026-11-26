@@ -1,0 +1,1070 @@
+{
+  "scope": "controlled_cross_embodiment_kinematic_proxy",
+  "paper_grade": false,
+  "decision": "NO_GO_ON_CURRENT_PROXY",
+  "gates": {
+    "c0": true,
+    "c1": false,
+    "c2": false,
+    "c4": false
+  },
+  "c0": {
+    "passed": true,
+    "pair_overlap_count": 0,
+    "task_overlap_count": 0,
+    "split_counts": {
+      "train_samples": 144,
+      "val_samples": 12,
+      "test_samples": 24,
+      "train_pairs": 48,
+      "val_pairs": 4,
+      "test_pairs": 8,
+      "train_tasks": 4,
+      "val_tasks": 1,
+      "test_tasks": 1
+    },
+    "body_counts": {
+      "train": {
+        "franka_panda": 48,
+        "ur5e": 48,
+        "sawyer": 48
+      },
+      "val": {
+        "franka_panda": 4,
+        "ur5e": 4,
+        "sawyer": 4
+      },
+      "test": {
+        "franka_panda": 8,
+        "ur5e": 8,
+        "sawyer": 8
+      }
+    },
+    "by_seed": {
+      "0": {
+        "passed": true,
+        "pair_overlap_count": 0,
+        "task_overlap_count": 0,
+        "split_counts": {
+          "train_samples": 144,
+          "val_samples": 12,
+          "test_samples": 24,
+          "train_pairs": 48,
+          "val_pairs": 4,
+          "test_pairs": 8,
+          "train_tasks": 4,
+          "val_tasks": 1,
+          "test_tasks": 1
+        },
+        "body_counts": {
+          "train": {
+            "franka_panda": 48,
+            "ur5e": 48,
+            "sawyer": 48
+          },
+          "val": {
+            "franka_panda": 4,
+            "ur5e": 4,
+            "sawyer": 4
+          },
+          "test": {
+            "franka_panda": 8,
+            "ur5e": 8,
+            "sawyer": 8
+          }
+        },
+        "dimensions": {
+          "context": [
+            42
+          ],
+          "native_action": [
+            [
+              4,
+              8
+            ]
+          ],
+          "semantic_action": [
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "chunk_length": 4,
+        "stride": 4
+      }
+    },
+    "expert_action_audit": {
+      "0": {
+        "passed": true,
+        "bodies": [
+          {
+            "body_index": 0,
+            "morphology": "franka_panda",
+            "action_dim": 7,
+            "samples": 8,
+            "expert_executable_rate": 1.0,
+            "expert_semantic_mae": 0.04141447693109512,
+            "maximum_step": 0.5214765071868896,
+            "velocity_limit": 0.78
+          },
+          {
+            "body_index": 1,
+            "morphology": "ur5e",
+            "action_dim": 6,
+            "samples": 8,
+            "expert_executable_rate": 1.0,
+            "expert_semantic_mae": 0.06188366562128067,
+            "maximum_step": 0.47564756870269775,
+            "velocity_limit": 0.84
+          },
+          {
+            "body_index": 2,
+            "morphology": "sawyer",
+            "action_dim": 7,
+            "samples": 8,
+            "expert_executable_rate": 1.0,
+            "expert_semantic_mae": 0.04578547179698944,
+            "maximum_step": 0.5351497530937195,
+            "velocity_limit": 0.72
+          }
+        ]
+      }
+    },
+    "bodies": [
+      {
+        "body_index": 0,
+        "morphology": "franka_panda",
+        "action_dim": 7,
+        "samples": 8,
+        "expert_executable_rate": 1.0,
+        "expert_semantic_mae": 0.04141447693109512,
+        "maximum_step": 0.5214765071868896,
+        "velocity_limit": 0.78
+      },
+      {
+        "body_index": 1,
+        "morphology": "ur5e",
+        "action_dim": 6,
+        "samples": 8,
+        "expert_executable_rate": 1.0,
+        "expert_semantic_mae": 0.06188366562128067,
+        "maximum_step": 0.47564756870269775,
+        "velocity_limit": 0.84
+      },
+      {
+        "body_index": 2,
+        "morphology": "sawyer",
+        "action_dim": 7,
+        "samples": 8,
+        "expert_executable_rate": 1.0,
+        "expert_semantic_mae": 0.04578547179698944,
+        "maximum_step": 0.5351497530937195,
+        "velocity_limit": 0.72
+      }
+    ]
+  },
+  "c1_summary": [
+    {
+      "method": "celar",
+      "runs": 1,
+      "retrieval_r1": 0.125,
+      "retrieval_r1_ci95_lower": 0.125,
+      "retrieval_r1_ci95_upper": 0.125,
+      "retrieval_r5": 0.75,
+      "retrieval_r5_ci95_lower": 0.75,
+      "retrieval_r5_ci95_upper": 0.75,
+      "reconstruction_mae": 0.23214223980903625,
+      "reconstruction_mae_ci95_lower": 0.23214223980903625,
+      "reconstruction_mae_ci95_upper": 0.23214223980903625,
+      "semantic_mae": 0.39216727018356323,
+      "semantic_mae_ci95_lower": 0.39216727018356323,
+      "semantic_mae_ci95_upper": 0.39216727018356323,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.000737668015062809,
+      "cycle_error_ci95_lower": 0.000737668015062809,
+      "cycle_error_ci95_upper": 0.000737668015062809,
+      "progress_pair_gap": 0.005600288510322571,
+      "progress_pair_gap_ci95_lower": 0.005600288510322571,
+      "progress_pair_gap_ci95_upper": 0.005600288510322571,
+      "latent_effective_rank": 1.7116156964115539,
+      "latent_effective_rank_ci95_lower": 1.7116156964115539,
+      "latent_effective_rank_ci95_upper": 1.7116156964115539,
+      "body_balance_gap": 0.006753355264663696,
+      "body_balance_gap_ci95_lower": 0.006753355264663696,
+      "body_balance_gap_ci95_upper": 0.006753355264663696
+    },
+    {
+      "method": "celar_no_align",
+      "runs": 1,
+      "retrieval_r1": 0.0,
+      "retrieval_r1_ci95_lower": 0.0,
+      "retrieval_r1_ci95_upper": 0.0,
+      "retrieval_r5": 0.5,
+      "retrieval_r5_ci95_lower": 0.5,
+      "retrieval_r5_ci95_upper": 0.5,
+      "reconstruction_mae": 0.22846660017967224,
+      "reconstruction_mae_ci95_lower": 0.22846660017967224,
+      "reconstruction_mae_ci95_upper": 0.22846660017967224,
+      "semantic_mae": 0.384926974773407,
+      "semantic_mae_ci95_lower": 0.384926974773407,
+      "semantic_mae_ci95_upper": 0.384926974773407,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.004185371100902557,
+      "cycle_error_ci95_lower": 0.004185371100902557,
+      "cycle_error_ci95_upper": 0.004185371100902557,
+      "progress_pair_gap": 0.022998666390776634,
+      "progress_pair_gap_ci95_lower": 0.022998666390776634,
+      "progress_pair_gap_ci95_upper": 0.022998666390776634,
+      "latent_effective_rank": 2.131418532017824,
+      "latent_effective_rank_ci95_lower": 2.131418532017824,
+      "latent_effective_rank_ci95_upper": 2.131418532017824,
+      "body_balance_gap": 0.010157138109207153,
+      "body_balance_gap_ci95_lower": 0.010157138109207153,
+      "body_balance_gap_ci95_upper": 0.010157138109207153
+    },
+    {
+      "method": "celar_no_cycle",
+      "runs": 1,
+      "retrieval_r1": 0.0,
+      "retrieval_r1_ci95_lower": 0.0,
+      "retrieval_r1_ci95_upper": 0.0,
+      "retrieval_r5": 0.75,
+      "retrieval_r5_ci95_lower": 0.75,
+      "retrieval_r5_ci95_upper": 0.75,
+      "reconstruction_mae": 0.23221363127231598,
+      "reconstruction_mae_ci95_lower": 0.23221363127231598,
+      "reconstruction_mae_ci95_upper": 0.23221363127231598,
+      "semantic_mae": 0.39225471019744873,
+      "semantic_mae_ci95_lower": 0.39225471019744873,
+      "semantic_mae_ci95_upper": 0.39225471019744873,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.0009211172582581639,
+      "cycle_error_ci95_lower": 0.0009211172582581639,
+      "cycle_error_ci95_upper": 0.0009211172582581639,
+      "progress_pair_gap": 0.006040029227733612,
+      "progress_pair_gap_ci95_lower": 0.006040029227733612,
+      "progress_pair_gap_ci95_upper": 0.006040029227733612,
+      "latent_effective_rank": 1.7749457901674985,
+      "latent_effective_rank_ci95_lower": 1.7749457901674985,
+      "latent_effective_rank_ci95_upper": 1.7749457901674985,
+      "body_balance_gap": 0.0068367719650268555,
+      "body_balance_gap_ci95_lower": 0.0068367719650268555,
+      "body_balance_gap_ci95_upper": 0.0068367719650268555
+    },
+    {
+      "method": "celar_no_outcome",
+      "runs": 1,
+      "retrieval_r1": 0.125,
+      "retrieval_r1_ci95_lower": 0.125,
+      "retrieval_r1_ci95_upper": 0.125,
+      "retrieval_r5": 0.75,
+      "retrieval_r5_ci95_lower": 0.75,
+      "retrieval_r5_ci95_upper": 0.75,
+      "reconstruction_mae": 0.23086103796958923,
+      "reconstruction_mae_ci95_lower": 0.23086103796958923,
+      "reconstruction_mae_ci95_upper": 0.23086103796958923,
+      "semantic_mae": 0.3883923888206482,
+      "semantic_mae_ci95_lower": 0.3883923888206482,
+      "semantic_mae_ci95_upper": 0.3883923888206482,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.0004064549575559795,
+      "cycle_error_ci95_lower": 0.0004064549575559795,
+      "cycle_error_ci95_upper": 0.0004064549575559795,
+      "progress_pair_gap": 0.006336870137602091,
+      "progress_pair_gap_ci95_lower": 0.006336870137602091,
+      "progress_pair_gap_ci95_upper": 0.006336870137602091,
+      "latent_effective_rank": 2.3514805061669795,
+      "latent_effective_rank_ci95_lower": 2.3514805061669795,
+      "latent_effective_rank_ci95_upper": 2.3514805061669795,
+      "body_balance_gap": 0.006328612565994263,
+      "body_balance_gap_ci95_lower": 0.006328612565994263,
+      "body_balance_gap_ci95_upper": 0.006328612565994263
+    },
+    {
+      "method": "celar_shuffled",
+      "runs": 1,
+      "retrieval_r1": 0.125,
+      "retrieval_r1_ci95_lower": 0.125,
+      "retrieval_r1_ci95_upper": 0.125,
+      "retrieval_r5": 0.375,
+      "retrieval_r5_ci95_lower": 0.375,
+      "retrieval_r5_ci95_upper": 0.375,
+      "reconstruction_mae": 0.23163652420043945,
+      "reconstruction_mae_ci95_lower": 0.23163652420043945,
+      "reconstruction_mae_ci95_upper": 0.23163652420043945,
+      "semantic_mae": 0.38897231221199036,
+      "semantic_mae_ci95_lower": 0.38897231221199036,
+      "semantic_mae_ci95_upper": 0.38897231221199036,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.00034633491304703057,
+      "cycle_error_ci95_lower": 0.00034633491304703057,
+      "cycle_error_ci95_upper": 0.00034633491304703057,
+      "progress_pair_gap": 0.007491396740078926,
+      "progress_pair_gap_ci95_lower": 0.007491396740078926,
+      "progress_pair_gap_ci95_upper": 0.007491396740078926,
+      "latent_effective_rank": 3.4313739102191634,
+      "latent_effective_rank_ci95_lower": 3.4313739102191634,
+      "latent_effective_rank_ci95_upper": 3.4313739102191634,
+      "body_balance_gap": 0.005452632904052734,
+      "body_balance_gap_ci95_lower": 0.005452632904052734,
+      "body_balance_gap_ci95_upper": 0.005452632904052734
+    },
+    {
+      "method": "independent_ae",
+      "runs": 1,
+      "retrieval_r1": 0.125,
+      "retrieval_r1_ci95_lower": 0.125,
+      "retrieval_r1_ci95_upper": 0.125,
+      "retrieval_r5": 0.625,
+      "retrieval_r5_ci95_lower": 0.625,
+      "retrieval_r5_ci95_upper": 0.625,
+      "reconstruction_mae": 0.2229159027338028,
+      "reconstruction_mae_ci95_lower": 0.2229159027338028,
+      "reconstruction_mae_ci95_upper": 0.2229159027338028,
+      "semantic_mae": 0.36848723888397217,
+      "semantic_mae_ci95_lower": 0.36848723888397217,
+      "semantic_mae_ci95_upper": 0.36848723888397217,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.03323566913604736,
+      "cycle_error_ci95_lower": 0.03323566913604736,
+      "cycle_error_ci95_upper": 0.03323566913604736,
+      "progress_pair_gap": 0.1174953430891037,
+      "progress_pair_gap_ci95_lower": 0.1174953430891037,
+      "progress_pair_gap_ci95_upper": 0.1174953430891037,
+      "latent_effective_rank": 3.038735371374483,
+      "latent_effective_rank_ci95_lower": 3.038735371374483,
+      "latent_effective_rank_ci95_upper": 3.038735371374483,
+      "body_balance_gap": 0.02641928195953369,
+      "body_balance_gap_ci95_lower": 0.02641928195953369,
+      "body_balance_gap_ci95_upper": 0.02641928195953369
+    },
+    {
+      "method": "shared_ae",
+      "runs": 1,
+      "retrieval_r1": 0.0,
+      "retrieval_r1_ci95_lower": 0.0,
+      "retrieval_r1_ci95_upper": 0.0,
+      "retrieval_r5": 0.5,
+      "retrieval_r5_ci95_lower": 0.5,
+      "retrieval_r5_ci95_upper": 0.5,
+      "reconstruction_mae": 0.22846660017967224,
+      "reconstruction_mae_ci95_lower": 0.22846660017967224,
+      "reconstruction_mae_ci95_upper": 0.22846660017967224,
+      "semantic_mae": 0.384926974773407,
+      "semantic_mae_ci95_lower": 0.384926974773407,
+      "semantic_mae_ci95_upper": 0.384926974773407,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "cycle_error": 0.004185371100902557,
+      "cycle_error_ci95_lower": 0.004185371100902557,
+      "cycle_error_ci95_upper": 0.004185371100902557,
+      "progress_pair_gap": 0.022998666390776634,
+      "progress_pair_gap_ci95_lower": 0.022998666390776634,
+      "progress_pair_gap_ci95_upper": 0.022998666390776634,
+      "latent_effective_rank": 2.131418532017824,
+      "latent_effective_rank_ci95_lower": 2.131418532017824,
+      "latent_effective_rank_ci95_upper": 2.131418532017824,
+      "body_balance_gap": 0.010157138109207153,
+      "body_balance_gap_ci95_lower": 0.010157138109207153,
+      "body_balance_gap_ci95_upper": 0.010157138109207153
+    }
+  ],
+  "c1_comparisons": [
+    {
+      "name": "c1_retrieval_r1_celar_vs_shared_ae",
+      "metric": "retrieval_r1",
+      "treatment": "celar",
+      "control": "shared_ae",
+      "n_pairs": 1,
+      "mean_difference": 0.125,
+      "ci95_lower": 0.125,
+      "ci95_upper": 0.125,
+      "paired_t_p": 0.0
+    },
+    {
+      "name": "c1_retrieval_r1_celar_vs_celar_no_align",
+      "metric": "retrieval_r1",
+      "treatment": "celar",
+      "control": "celar_no_align",
+      "n_pairs": 1,
+      "mean_difference": 0.125,
+      "ci95_lower": 0.125,
+      "ci95_upper": 0.125,
+      "paired_t_p": 0.0
+    },
+    {
+      "name": "c1_semantic_mae_celar_vs_shared_ae",
+      "metric": "semantic_mae",
+      "treatment": "celar",
+      "control": "shared_ae",
+      "n_pairs": 1,
+      "mean_difference": 0.00724029541015625,
+      "ci95_lower": 0.00724029541015625,
+      "ci95_upper": 0.00724029541015625,
+      "paired_t_p": 0.0
+    },
+    {
+      "name": "c1_semantic_mae_celar_vs_celar_no_cycle",
+      "metric": "semantic_mae",
+      "treatment": "celar",
+      "control": "celar_no_cycle",
+      "n_pairs": 1,
+      "mean_difference": -8.744001388549805e-05,
+      "ci95_lower": -8.744001388549805e-05,
+      "ci95_upper": -8.744001388549805e-05,
+      "paired_t_p": 0.0
+    },
+    {
+      "name": "c1_semantic_mae_celar_vs_celar_no_outcome",
+      "metric": "semantic_mae",
+      "treatment": "celar",
+      "control": "celar_no_outcome",
+      "n_pairs": 1,
+      "mean_difference": 0.003774881362915039,
+      "ci95_lower": 0.003774881362915039,
+      "ci95_upper": 0.003774881362915039,
+      "paired_t_p": 0.0
+    }
+  ],
+  "c2_summary": [
+    {
+      "method": "celar_bc",
+      "runs": 2,
+      "semantic_mae": 0.3943229466676712,
+      "semantic_mae_ci95_lower": 0.3885444402694702,
+      "semantic_mae_ci95_upper": 0.4001014530658722,
+      "native_mae": 0.23283731192350388,
+      "native_mae_ci95_lower": 0.22336824238300323,
+      "native_mae_ci95_upper": 0.24230638146400452,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.0,
+      "executable_rate_ci95_upper": 0.25,
+      "jerk": 0.11803602427244186,
+      "jerk_ci95_lower": 0.09144634008407593,
+      "jerk_ci95_upper": 0.1446257084608078
+    },
+    {
+      "method": "native_bc",
+      "runs": 2,
+      "semantic_mae": 0.32512763142585754,
+      "semantic_mae_ci95_lower": 0.30435317754745483,
+      "semantic_mae_ci95_upper": 0.34590208530426025,
+      "native_mae": 0.19700733572244644,
+      "native_mae_ci95_lower": 0.1690710484981537,
+      "native_mae_ci95_upper": 0.2249436229467392,
+      "executable_rate": 0.5,
+      "executable_rate_ci95_lower": 0.5,
+      "executable_rate_ci95_upper": 0.5,
+      "jerk": 0.22246872633695602,
+      "jerk_ci95_lower": 0.21122866868972778,
+      "jerk_ci95_upper": 0.23370878398418427
+    }
+  ],
+  "c4_summary": [
+    {
+      "shots": 5,
+      "method": "celar_decoder_adapter",
+      "runs": 1,
+      "semantic_mae": 0.3827921748161316,
+      "semantic_mae_ci95_lower": 0.3827921748161316,
+      "semantic_mae_ci95_upper": 0.3827921748161316,
+      "native_mae": 0.20459258556365967,
+      "native_mae_ci95_lower": 0.20459258556365967,
+      "native_mae_ci95_upper": 0.20459258556365967,
+      "executable_rate": 0.125,
+      "executable_rate_ci95_lower": 0.125,
+      "executable_rate_ci95_upper": 0.125,
+      "jerk": 0.08715273439884186,
+      "jerk_ci95_lower": 0.08715273439884186,
+      "jerk_ci95_upper": 0.08715273439884186
+    },
+    {
+      "shots": 5,
+      "method": "independent_bc",
+      "runs": 1,
+      "semantic_mae": 0.3801887035369873,
+      "semantic_mae_ci95_lower": 0.3801887035369873,
+      "semantic_mae_ci95_upper": 0.3801887035369873,
+      "native_mae": 0.21246322989463806,
+      "native_mae_ci95_lower": 0.21246322989463806,
+      "native_mae_ci95_upper": 0.21246322989463806,
+      "executable_rate": 0.625,
+      "executable_rate_ci95_lower": 0.625,
+      "executable_rate_ci95_upper": 0.625,
+      "jerk": 0.22736671566963196,
+      "jerk_ci95_lower": 0.22736671566963196,
+      "jerk_ci95_upper": 0.22736671566963196
+    }
+  ],
+  "c4_comparisons": [
+    {
+      "name": "c4_5_semantic_mae_celar_vs_independent",
+      "shots": 5,
+      "metric": "semantic_mae",
+      "treatment": "celar_decoder_adapter",
+      "control": "independent_bc",
+      "n_pairs": 1,
+      "mean_difference": 0.002603471279144287,
+      "ci95_lower": 0.002603471279144287,
+      "ci95_upper": 0.002603471279144287,
+      "paired_t_p": 0.0,
+      "holm_p": 0.0
+    },
+    {
+      "name": "c4_5_executable_rate_celar_vs_independent",
+      "shots": 5,
+      "metric": "executable_rate",
+      "treatment": "celar_decoder_adapter",
+      "control": "independent_bc",
+      "n_pairs": 1,
+      "mean_difference": -0.5,
+      "ci95_lower": -0.5,
+      "ci95_upper": -0.5,
+      "paired_t_p": 0.0,
+      "holm_p": 0.0
+    }
+  ],
+  "training_histories": {
+    "c1/independent_ae/seed_0": [
+      {
+        "body": 0.0,
+        "epoch": 1.0,
+        "loss": 0.09397836029529572
+      },
+      {
+        "body": 0.0,
+        "epoch": 2.0,
+        "loss": 0.06803754717111588
+      },
+      {
+        "body": 0.0,
+        "epoch": 3.0,
+        "loss": 0.06155233830213547
+      },
+      {
+        "body": 0.0,
+        "epoch": 4.0,
+        "loss": 0.05701626092195511
+      },
+      {
+        "body": 0.0,
+        "epoch": 5.0,
+        "loss": 0.05080891773104668
+      },
+      {
+        "body": 0.0,
+        "epoch": 6.0,
+        "loss": 0.04575357213616371
+      },
+      {
+        "body": 0.0,
+        "epoch": 7.0,
+        "loss": 0.04309564456343651
+      },
+      {
+        "body": 0.0,
+        "epoch": 8.0,
+        "loss": 0.04142259061336517
+      },
+      {
+        "body": 1.0,
+        "epoch": 1.0,
+        "loss": 0.11345674842596054
+      },
+      {
+        "body": 1.0,
+        "epoch": 2.0,
+        "loss": 0.06957729905843735
+      },
+      {
+        "body": 1.0,
+        "epoch": 3.0,
+        "loss": 0.04974217712879181
+      },
+      {
+        "body": 1.0,
+        "epoch": 4.0,
+        "loss": 0.048335909843444824
+      },
+      {
+        "body": 1.0,
+        "epoch": 5.0,
+        "loss": 0.051869750022888184
+      },
+      {
+        "body": 1.0,
+        "epoch": 6.0,
+        "loss": 0.05057145282626152
+      },
+      {
+        "body": 1.0,
+        "epoch": 7.0,
+        "loss": 0.045342616736888885
+      },
+      {
+        "body": 1.0,
+        "epoch": 8.0,
+        "loss": 0.03942042961716652
+      }
+    ],
+    "c1/shared_ae/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.04903574660420418,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.041192904114723206,
+        "reconstruction": 0.04110421612858772,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.001478134305216372
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.03709984943270683,
+        "reconstruction": 0.03699496015906334,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0017481507966294885
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.0349983274936676,
+        "reconstruction": 0.03483263775706291,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0027614778373390436
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.033713191747665405,
+        "reconstruction": 0.033463358879089355,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.004163877572864294
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.032828718423843384,
+        "reconstruction": 0.03243871033191681,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0065001389011740685
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.032229408621788025,
+        "reconstruction": 0.031669631600379944,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.009329593740403652
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.0317564532160759,
+        "reconstruction": 0.031083837151527405,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.011210252530872822
+      }
+    ],
+    "c1/celar_no_align/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.04903574660420418,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.041192904114723206,
+        "reconstruction": 0.04110421612858772,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.001478134305216372
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.03709984943270683,
+        "reconstruction": 0.03699496015906334,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0017481507966294885
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.0349983274936676,
+        "reconstruction": 0.03483263775706291,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0027614778373390436
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.033713191747665405,
+        "reconstruction": 0.033463358879089355,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.004163877572864294
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.032828718423843384,
+        "reconstruction": 0.03243871033191681,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0065001389011740685
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.032229408621788025,
+        "reconstruction": 0.031669631600379944,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.009329593740403652
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.0317564532160759,
+        "reconstruction": 0.031083837151527405,
+        "alignment": 0.0,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.011210252530872822
+      }
+    ],
+    "c1/celar_no_cycle/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.13773098587989807,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.0005970389465801418,
+        "cycle": 0.0,
+        "outcome": 0.4415358603000641,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.08810977637767792,
+        "reconstruction": 0.04152004048228264,
+        "alignment": 0.0004426181549206376,
+        "cycle": 0.0,
+        "outcome": 0.23123319447040558,
+        "smooth": 0.0009232583688572049
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.0594368651509285,
+        "reconstruction": 0.037334173917770386,
+        "alignment": 0.00039424069109372795,
+        "cycle": 0.0,
+        "outcome": 0.10900998115539551,
+        "smooth": 0.0007406637305393815
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.04866258427500725,
+        "reconstruction": 0.03512438014149666,
+        "alignment": 0.00039324574754573405,
+        "cycle": 0.0,
+        "outcome": 0.06610163301229477,
+        "smooth": 0.00103780219797045
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.05126301571726799,
+        "reconstruction": 0.03397159278392792,
+        "alignment": 0.0003974536375608295,
+        "cycle": 0.0,
+        "outcome": 0.08458256721496582,
+        "smooth": 0.0019427626393735409
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.05780184641480446,
+        "reconstruction": 0.03325231745839119,
+        "alignment": 0.00038579452666454017,
+        "cycle": 0.0,
+        "outcome": 0.12072739005088806,
+        "smooth": 0.0025547603145241737
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.06043102592229843,
+        "reconstruction": 0.03280016407370567,
+        "alignment": 0.000378273893147707,
+        "cycle": 0.0,
+        "outcome": 0.13574987649917603,
+        "smooth": 0.003916830290108919
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.05856933444738388,
+        "reconstruction": 0.0326530747115612,
+        "alignment": 0.0003763373533729464,
+        "cycle": 0.0,
+        "outcome": 0.12706637382507324,
+        "smooth": 0.004306096117943525
+      }
+    ],
+    "c1/celar_no_outcome/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.04954566806554794,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.0005970389465801418,
+        "cycle": 0.0006092370604164898,
+        "outcome": 0.0,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.04157818853855133,
+        "reconstruction": 0.04123425856232643,
+        "alignment": 0.00032367362291552126,
+        "cycle": 0.00042265307274647057,
+        "outcome": 0.0,
+        "smooth": 0.0008168233907781541
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.03747064247727394,
+        "reconstruction": 0.037180740386247635,
+        "alignment": 0.0002666742366272956,
+        "cycle": 0.00038692314410582185,
+        "outcome": 0.0,
+        "smooth": 0.0006529999664053321
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.03531955927610397,
+        "reconstruction": 0.035075996071100235,
+        "alignment": 0.00021041020227130502,
+        "cycle": 0.00034103781217709184,
+        "outcome": 0.0,
+        "smooth": 0.0006431718938983977
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.03411007672548294,
+        "reconstruction": 0.033860839903354645,
+        "alignment": 0.0001800647150957957,
+        "cycle": 0.00032478987122885883,
+        "outcome": 0.0,
+        "smooth": 0.0011206549825146794
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.03336591646075249,
+        "reconstruction": 0.03310803696513176,
+        "alignment": 0.00017484254203736782,
+        "cycle": 0.00034912844421342015,
+        "outcome": 0.0,
+        "smooth": 0.001240096869878471
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.03297638148069382,
+        "reconstruction": 0.032689325511455536,
+        "alignment": 0.0001791771501302719,
+        "cycle": 0.00039318628842011094,
+        "outcome": 0.0,
+        "smooth": 0.0015325798885896802
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.032843947410583496,
+        "reconstruction": 0.032512012869119644,
+        "alignment": 0.00018156606529373676,
+        "cycle": 0.0004290763463359326,
+        "outcome": 0.0,
+        "smooth": 0.002135014394298196
+      }
+    ],
+    "c1/celar_shuffled/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.04958720877766609,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.000848404539283365,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.041656095534563065,
+        "reconstruction": 0.041262585669755936,
+        "alignment": 0.0005580229335464537,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0005131957586854696
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.03753821551799774,
+        "reconstruction": 0.03724174574017525,
+        "alignment": 0.0004243777657393366,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.00034372115624137223
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.03546811267733574,
+        "reconstruction": 0.03517071157693863,
+        "alignment": 0.0004227185563649982,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.00037722321576438844
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.034279871731996536,
+        "reconstruction": 0.03400074318051338,
+        "alignment": 0.0003919116861652583,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.00040644442196935415
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.033552926033735275,
+        "reconstruction": 0.033322934061288834,
+        "alignment": 0.00032341820769943297,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.00032949575688689947
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.03324607387185097,
+        "reconstruction": 0.03300301730632782,
+        "alignment": 0.0003436418774072081,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.0003281485987827182
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.03323151543736458,
+        "reconstruction": 0.032971128821372986,
+        "alignment": 0.0003671624872367829,
+        "cycle": 0.0,
+        "outcome": 0.0,
+        "smooth": 0.00036216265289112926
+      }
+    ],
+    "c1/celar/seed_0": [
+      {
+        "epoch": 1.0,
+        "loss": 0.13785284757614136,
+        "reconstruction": 0.04903574660420418,
+        "alignment": 0.0005970389465801418,
+        "cycle": 0.0006092370604164898,
+        "outcome": 0.4415358603000641,
+        "smooth": 0.0
+      },
+      {
+        "epoch": 2.0,
+        "loss": 0.08818989992141724,
+        "reconstruction": 0.04150649532675743,
+        "alignment": 0.0004152519104536623,
+        "cycle": 0.00047530001029372215,
+        "outcome": 0.2313276082277298,
+        "smooth": 0.000881872430909425
+      },
+      {
+        "epoch": 3.0,
+        "loss": 0.05951482430100441,
+        "reconstruction": 0.03732622414827347,
+        "alignment": 0.00035485601983964443,
+        "cycle": 0.00046104687498882413,
+        "outcome": 0.10912227630615234,
+        "smooth": 0.0006879937718622386
+      },
+      {
+        "epoch": 4.0,
+        "loss": 0.048737410455942154,
+        "reconstruction": 0.03512359410524368,
+        "alignment": 0.00034189733560197055,
+        "cycle": 0.0004978944198228419,
+        "outcome": 0.06617922335863113,
+        "smooth": 0.0009359833784401417
+      },
+      {
+        "epoch": 5.0,
+        "loss": 0.051338452845811844,
+        "reconstruction": 0.03398245573043823,
+        "alignment": 0.0003372167993802577,
+        "cycle": 0.00055849296040833,
+        "outcome": 0.08460504561662674,
+        "smooth": 0.001734912395477295
+      },
+      {
+        "epoch": 6.0,
+        "loss": 0.057900432497262955,
+        "reconstruction": 0.03328217566013336,
+        "alignment": 0.00032558254315517843,
+        "cycle": 0.0006214311579242349,
+        "outcome": 0.12074025720357895,
+        "smooth": 0.002238065470010042
+      },
+      {
+        "epoch": 7.0,
+        "loss": 0.060572847723960876,
+        "reconstruction": 0.03285393863916397,
+        "alignment": 0.00032270376686938107,
+        "cycle": 0.0006932334508746862,
+        "outcome": 0.13585516810417175,
+        "smooth": 0.0033244811929762363
+      },
+      {
+        "epoch": 8.0,
+        "loss": 0.05876152217388153,
+        "reconstruction": 0.03272633254528046,
+        "alignment": 0.00032464045216329396,
+        "cycle": 0.0007394575513899326,
+        "outcome": 0.12730461359024048,
+        "smooth": 0.003589329309761524
+      }
+    ]
+  },
+  "runtime_seconds": 3.468215099999952
+}

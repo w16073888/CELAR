@@ -1,0 +1,9 @@
+pairs_per_task: 100
+render_size: 128
+seed: 20261106
+output_dir: results/c0_mujoco_v1
+memory_batch_size: 8
+memory_limit_gb: 10.5
+latency_trials: 20
+max_median_latency_ms: 180.0
+max_p95_latency_ms: 300.0

@@ -1,0 +1,69 @@
+Cross-Embodiment Latent Action Reinforcement Learning: A Two-Stage Feasibility Study with CELAR
+
+ABSTRACT
+
+Cross-embodiment robot learning seeks a reusable action interface across manipulators with different joint counts, kinematics, limits, and demonstrations. We present a two-stage feasibility study of CELAR, Cross-Embodiment Latent Action Reinforcement Learning. First, we construct a MuJoCo pipeline for Panda, UR5e, and Sawyer with 1,200 paired trajectories across four tasks, 128 by 128 RGB-D observations, action chunks, poses, gripper states, progress, success, and safety flags. All engineering gates pass: reset and step are deterministic, RGB-D and end-effector projections agree within one pixel, safety violations and split leakage are zero, batch-eight memory reserves 0.260 GB, and action-chunk latency is below one millisecond. Second, a controlled cross-embodiment proxy evaluates the method with three seeds. CELAR reaches 0.911 semantic retrieval R@1 versus 0.550 for a shared autoencoder. Latent behavior cloning is within 10.7% of native-action error while reducing jerk by about 53%. Under equal PPO budgets, final success is 71.5% for CELAR, 37.5% for native-action PPO, and 53.5% for a shared decoder. A held-out robot reduces five-shot decoder error by 26%. The evidence justifies a larger MuJoCo study, not yet a real-robot claim.
+
+1. INTRODUCTION
+
+Robot policies are usually tied to one embodiment. A seven-joint arm cannot directly execute the joint-space actions of a six-joint arm, and similar robots may differ in joint ordering, velocity limits, workspace, gripper conventions, and latency. This mismatch makes fleet-wide transfer difficult and adding a robot expensive, often requiring a new policy, action head, or large embodiment-specific dataset.
+
+CELAR treats the action interface as a representation-learning problem. Each robot retains a private action decoder, while a compact latent action is shared across embodiments. Training uses synchronized task stages and paired scene states to encourage semantically similar actions to occupy neighboring latent regions. The intended benefit is not that one joint command can be copied to another robot. Rather, a policy should select an action meaning, such as approaching, closing the gripper, lifting, or pulling a handle, and each decoder should translate that meaning into feasible native control.
+
+We ask two questions. Can a compact simulator produce auditable paired data under a 12 GB GPU budget? Does latent cross-embodiment conditioning improve alignment, preserve single-robot control, and improve reinforcement-learning efficiency? We separate the questions because a successful data generator does not prove transfer, and a favorable proxy does not prove real-robot execution.
+
+2. CELAR REPRESENTATION
+
+For observation context c_t and native action chunk a_t^k of embodiment k, CELAR learns an encoder E and a projected latent u_t in eight dimensions:
+
+u_t = Proj(E(c_t, a_t^k, e_k)),
+
+where e_k is a morphology descriptor. A body-specific decoder D_k reconstructs the native action chunk:
+
+a_hat_t^k = D_k(u_t, e_k).
+
+The encoder receives visual, language, proprioceptive, and morphology information. The decoder is private to each robot because reconstructing joint commands across different kinematic structures is not meaningful. The shared component is the action meaning.
+
+Training combines reconstruction, cross-embodiment alignment, cycle consistency, progress-outcome consistency, and temporal smoothness. Reconstruction preserves body-specific control. Alignment pulls paired trajectories closer. Cycle consistency requires a latent decoded by one robot and re-encoded through its partner to recover the original code. Outcome consistency prevents latent similarity from representing different progress, while smoothness limits abrupt changes around contact. A deterministic pre-execution safety layer clips joint limits, velocity, workspace, and gripper range. Complete action blocks of length four, six, or eight are executed without per-substep resampling.
+
+3. STAGE ONE: MUJOCO ENGINEERING GATE
+
+The first stage is a real MuJoCo rigid-body environment with a table, object, goal marker, drawer, and a minimal serial arm for each embodiment. The arms are deliberately lightweight rather than vendor-exact assets, isolating data, rendering, safety, and resource checks before introducing full manufacturer models.
+
+We generate 100 paired scenes per task family for each robot, totaling 1,200 trajectories. The four task families are pick, place, open-drawer, and push. Every pair shares task ID, scene ID, initial object and goal positions, and initial robot configuration. The data are divided 70/15/15 into train, validation, and test sets by grouped pairs, task instances, and scenes. No identifier crosses a split. We retain 120 failed trajectories and 120 perturbed trajectories.
+
+Each trajectory contains eight action chunks. Panda uses four actions per chunk, UR5e six, and Sawyer eight. Each chunk records native joint deltas, gripper command, end-effector pose, arm state, object pose, drawer displacement, progress, success, contact count, safety flags, RGB, metric depth, intrinsics, and extrinsics.
+
+All C0 checks pass. Pixel centroids from robot segmentation differ from projected end-effector positions by 0.66 to 0.83 pixels, and median depth differs by 0.018 m. Nominal expert success is 100% for pick, place, and drawer opening. Push success is 81.2% to 83.8%, indicating that contact behavior is the least mature task. Post-safety limit and velocity violations are zero. Pair-consistent initial states are exact, and pair, task, and scene overlaps across splits are zero. On an RTX 3060 with 12 GB of memory, a batch-eight ResNet-18 RGB-D forward-backward probe reserves 0.260 GB. Median chunk execution latency is 0.64 ms for Panda, 0.74 ms for UR5e, and 0.87 ms for Sawyer. These numbers include 128 by 128 depth and RGB rendering in the minimal scene.
+
+4. STAGE TWO: REPRESENTATION AND CONTROL PILOT
+
+The method experiment uses a controlled kinematic proxy; the minimal C0 arms do not yet validate full manipulation dynamics. The proxy preserves different native spaces, shared semantics, body-specific decoders, three seeds, and held-out tasks.
+
+For C1, we train seven variants: independent action autoencoders, a shared autoencoder, a shared model without alignment, CELAR without cycle consistency, CELAR without outcome consistency, CELAR with shuffled pairs, and full CELAR. Each configuration sees 1,944 paired training chunks and is tested on 60 pairs from held-out tasks. Full CELAR obtains semantic retrieval R@1 of 0.911 and R@5 of 0.967. A shared autoencoder obtains R@1 of 0.550, while shuffled pairing obtains 0.378. The paired improvement over the shared autoencoder is 0.361, with a 95% confidence interval of 0.300 to 0.400. Action executability after safety clipping is 0.981, and the eight-dimensional latent has an effective rank of 4.01, so the representation has not collapsed to one or two constants.
+
+For C2, we compare native-action behavior cloning with latent behavior cloning. The latent predictor outputs a normalized latent action, which passes through a frozen decoder during supervision. Over 800 epochs and three seeds, native BC has semantic action MAE 0.2553 and executability 0.733. CELAR BC has MAE 0.2827 and executability 0.631. The error ratio is 1.107 and the execution-rate ratio is 0.860, both within the predefined usable range. CELAR's jerk is 0.0478 versus 0.1007 for native BC. Thus the latent interface is acceptable for control, although it does not improve action accuracy.
+
+For C3, we train PPO from scratch with identical hyperparameters, environment seeds, and 49,152 online steps. Native-action PPO reaches 37.5% final success and needs 42,325 steps on average to reach 50% success. A shared-decoder PPO reaches 53.5%, while CELAR reaches 71.5% and needs 36,864 steps. The paired final-success improvement over native PPO is 34.0 percentage points, with a 95% confidence interval of 22.9 to 39.6 points and a paired t-test p-value of 0.026. A grouped audit across 18 seed, body, and task combinations shows a mean improvement of 29.4 points; 83.3% of the paired directions are positive, and five of six body-task averages favor CELAR.
+
+For C4, Sawyer is excluded from shared pretraining. Freezing CELAR's encoder and training only a new decoder from five demonstrations reduces semantic MAE from 0.1500 with an independent action autoencoder to 0.1110, a 26% reduction, with 100% executable blocks. At 20 demonstrations, the errors are 0.1085 and 0.1153. This supports action-interface adaptation, not direct frozen-policy transfer: the end-to-end policy-plus-adapter variant has MAE 0.4798 versus 0.3209 for independent BC.
+
+5. DISCUSSION
+
+The experiments support a specific conclusion. Cross-embodiment action semantics can be learned and transferred at the decoder level under modest resources. The alignment loss matters: removing it or shuffling pairs sharply reduces retrieval, and CELAR also improves over a shared decoder online. Safety preserves executability while the eight-dimensional code retains useful rank.
+
+The evidence also identifies where the method is still weak. Latent BC trades some semantic accuracy and executability for much smoother actions. Push behavior is least reliable in the MuJoCo C0 data. Most importantly, stronger teacher-latent decoder adaptation does not imply that a frozen high-level policy will generalize to a new embodiment. Layer-specific success must therefore be reported separately.
+
+6. LIMITATIONS AND NEXT STEPS
+
+The C0 simulator uses minimal kinematic arms, not manufacturer models. C1 through C4 use a proxy without full contact dynamics, real RGB-D, IK, network delay, or hardware. The three-seed PPO result is promising but small. The next study should use Robosuite or Menagerie models, preserve grouped splits, and compare native actions, normalized actions, end-effector deltas with IK, action VAEs, shared decoders, and CELAR under fixed budgets. It should report decoder and closed-loop policy adaptation separately.
+
+CONCLUSION
+
+CELAR passes the proposed C0 engineering gate and shows consistent cross-embodiment action alignment in a controlled pilot. The strongest evidence is the combination of high semantic retrieval, preserved action executability, majority-positive PPO gains, and efficient decoder adaptation. The strongest caution is that end-to-end policy transfer remains unsolved. CELAR is therefore a justified MuJoCo/Robosuite research direction, not yet a demonstrated real-robot reinforcement-learning method.
+
+REFERENCES
+
+1. Brohan et al. RT-1: Robotics Transformer for Real-World Control at Scale. arXiv:2212.06817, 2022.
+2. O'Neill et al. Open X-Embodiment: Robotic Learning Datasets and RT-X Models. arXiv:2310.08864, 2023.
+3. Chi et al. Diffusion Policy: Visuomotor Policy Learning via Action Diffusion. arXiv:2303.04137, 2023.

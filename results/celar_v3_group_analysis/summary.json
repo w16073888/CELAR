@@ -1,0 +1,10 @@
+{
+  "comparison": "celar_ppo_vs_native_ppo",
+  "seed_body_task_pairs": 18,
+  "mean_success_difference": 0.2939814814814815,
+  "ci95_lower": 0.17824074074074078,
+  "ci95_upper": 0.4050925925925926,
+  "positive_fraction": 0.8333333333333334,
+  "nonnegative_fraction": 0.8888888888888888,
+  "passed_majority_direction": true
+}

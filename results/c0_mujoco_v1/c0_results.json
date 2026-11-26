@@ -1,0 +1,577 @@
+{
+  "decision": "C0_PASS",
+  "gates": {
+    "environment_reset_step": true,
+    "rgbd_pose_alignment": true,
+    "expert_action_safety": true,
+    "split_leakage": true,
+    "pair_initial_state_consistency": true,
+    "expert_nominal_success": true,
+    "batch8_memory": true,
+    "chunk_latency": true,
+    "schema": true,
+    "coverage": true
+  },
+  "config": {
+    "pairs_per_task": 100,
+    "render_size": 128,
+    "seed": 20261106,
+    "output_dir": "results/c0_mujoco_v1",
+    "memory_batch_size": 8,
+    "memory_limit_gb": 10.5,
+    "latency_trials": 20,
+    "max_median_latency_ms": 180.0,
+    "max_p95_latency_ms": 300.0
+  },
+  "environment": {
+    "passed": true,
+    "trials": [
+      {
+        "robot": "panda",
+        "task_family": "pick",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "panda",
+        "task_family": "place",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "panda",
+        "task_family": "open_drawer",
+        "reset_error": 0.0,
+        "repeat_step_error": 3.4297365421432813e-16,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "panda",
+        "task_family": "push",
+        "reset_error": 0.0,
+        "repeat_step_error": 6.245004513516506e-17,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "ur5e",
+        "task_family": "pick",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "ur5e",
+        "task_family": "place",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "ur5e",
+        "task_family": "open_drawer",
+        "reset_error": 0.0,
+        "repeat_step_error": 2.4903385324959267e-15,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "ur5e",
+        "task_family": "push",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "sawyer",
+        "task_family": "pick",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "sawyer",
+        "task_family": "place",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "sawyer",
+        "task_family": "open_drawer",
+        "reset_error": 0.0,
+        "repeat_step_error": 8.187894806610529e-16,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      },
+      {
+        "robot": "sawyer",
+        "task_family": "push",
+        "reset_error": 0.0,
+        "repeat_step_error": 0.0,
+        "passed": true,
+        "rgb_shape": [
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          128,
+          128
+        ]
+      }
+    ]
+  },
+  "alignment": {
+    "passed": true,
+    "trials": [
+      {
+        "robot": "panda",
+        "passed": true,
+        "pixel_error": 0.7447002423442496,
+        "observed_depth": 1.2585347890853882,
+        "expected_depth": 1.276534736726709,
+        "depth_error": 0.017999947641320846
+      },
+      {
+        "robot": "ur5e",
+        "passed": true,
+        "pixel_error": 0.8254727933291816,
+        "observed_depth": 1.3143278360366821,
+        "expected_depth": 1.3323277890581484,
+        "depth_error": 0.017999953021466286
+      },
+      {
+        "robot": "sawyer",
+        "passed": true,
+        "pixel_error": 0.6578306900510799,
+        "observed_depth": 1.2900913953781128,
+        "expected_depth": 1.3080913965814343,
+        "depth_error": 0.01800000120332146
+      }
+    ]
+  },
+  "memory": {
+    "passed": true,
+    "backbone": "torchvision_resnet18",
+    "batch_size": 8,
+    "resolution": [
+      128,
+      128
+    ],
+    "peak_allocated_gb": 0.22851991653442383,
+    "peak_reserved_gb": 0.259765625,
+    "limit_gb": 10.5,
+    "step_seconds": 0.2476511539425701,
+    "gpu": "NVIDIA GeForce RTX 3060"
+  },
+  "latency": {
+    "passed": true,
+    "trials": [
+      {
+        "robot": "panda",
+        "median_ms": 0.6416295655071735,
+        "p95_ms": 0.8884121314622462,
+        "max_ms": 0.9368660394102335,
+        "passed": true
+      },
+      {
+        "robot": "ur5e",
+        "median_ms": 0.7425890071317554,
+        "p95_ms": 0.7744484930299225,
+        "max_ms": 1.0432328563183546,
+        "passed": true
+      },
+      {
+        "robot": "sawyer",
+        "median_ms": 0.8655439596623182,
+        "p95_ms": 0.8798550115898252,
+        "max_ms": 0.8821929804980755,
+        "passed": true
+      }
+    ]
+  },
+  "leakage": {
+    "passed": true,
+    "overlaps": {
+      "pair_id": 0,
+      "task_id": 0,
+      "scene_id": 0
+    },
+    "counts": [
+      {
+        "task_family": "open_drawer",
+        "robot": "panda",
+        "trajectories": 100
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "sawyer",
+        "trajectories": 100
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "ur5e",
+        "trajectories": 100
+      },
+      {
+        "task_family": "pick",
+        "robot": "panda",
+        "trajectories": 100
+      },
+      {
+        "task_family": "pick",
+        "robot": "sawyer",
+        "trajectories": 100
+      },
+      {
+        "task_family": "pick",
+        "robot": "ur5e",
+        "trajectories": 100
+      },
+      {
+        "task_family": "place",
+        "robot": "panda",
+        "trajectories": 100
+      },
+      {
+        "task_family": "place",
+        "robot": "sawyer",
+        "trajectories": 100
+      },
+      {
+        "task_family": "place",
+        "robot": "ur5e",
+        "trajectories": 100
+      },
+      {
+        "task_family": "push",
+        "robot": "panda",
+        "trajectories": 100
+      },
+      {
+        "task_family": "push",
+        "robot": "sawyer",
+        "trajectories": 100
+      },
+      {
+        "task_family": "push",
+        "robot": "ur5e",
+        "trajectories": 100
+      }
+    ],
+    "failure_trajectories": 120,
+    "perturbed_trajectories": 120,
+    "minimum_per_task_body": 80
+  },
+  "pair_consistency": {
+    "passed": true,
+    "pair_count": 400,
+    "inconsistent_pairs": [],
+    "inconsistent_pair_count": 0
+  },
+  "success_audit": {
+    "passed": true,
+    "nominal_by_task_body": [
+      {
+        "task_family": "open_drawer",
+        "robot": "panda",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "sawyer",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "ur5e",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "pick",
+        "robot": "panda",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "pick",
+        "robot": "sawyer",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "pick",
+        "robot": "ur5e",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "place",
+        "robot": "panda",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "place",
+        "robot": "sawyer",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "place",
+        "robot": "ur5e",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "push",
+        "robot": "panda",
+        "success_rate": 0.8375
+      },
+      {
+        "task_family": "push",
+        "robot": "sawyer",
+        "success_rate": 0.825
+      },
+      {
+        "task_family": "push",
+        "robot": "ur5e",
+        "success_rate": 0.8125
+      }
+    ],
+    "all_trajectories_by_task_body": [
+      {
+        "task_family": "open_drawer",
+        "robot": "panda",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "sawyer",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "open_drawer",
+        "robot": "ur5e",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "pick",
+        "robot": "panda",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "pick",
+        "robot": "sawyer",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "pick",
+        "robot": "ur5e",
+        "success_rate": 0.9
+      },
+      {
+        "task_family": "place",
+        "robot": "panda",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "place",
+        "robot": "sawyer",
+        "success_rate": 0.97
+      },
+      {
+        "task_family": "place",
+        "robot": "ur5e",
+        "success_rate": 1.0
+      },
+      {
+        "task_family": "push",
+        "robot": "panda",
+        "success_rate": 0.7
+      },
+      {
+        "task_family": "push",
+        "robot": "sawyer",
+        "success_rate": 0.69
+      },
+      {
+        "task_family": "push",
+        "robot": "ur5e",
+        "success_rate": 0.68
+      }
+    ]
+  },
+  "safety": {
+    "post_limit_violation_count": 0,
+    "post_velocity_violation_count": 0
+  },
+  "schema": {
+    "passed": true,
+    "robots": [
+      {
+        "robot": "panda",
+        "missing_keys": [],
+        "rgb_shape": [
+          8,
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          8,
+          128,
+          128
+        ],
+        "native_action_shape": [
+          8,
+          4,
+          7
+        ],
+        "chunk_length": 4,
+        "passed": true
+      },
+      {
+        "robot": "ur5e",
+        "missing_keys": [],
+        "rgb_shape": [
+          8,
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          8,
+          128,
+          128
+        ],
+        "native_action_shape": [
+          8,
+          6,
+          6
+        ],
+        "chunk_length": 6,
+        "passed": true
+      },
+      {
+        "robot": "sawyer",
+        "missing_keys": [],
+        "rgb_shape": [
+          8,
+          128,
+          128,
+          3
+        ],
+        "depth_shape": [
+          8,
+          128,
+          128
+        ],
+        "native_action_shape": [
+          8,
+          8,
+          7
+        ],
+        "chunk_length": 8,
+        "passed": true
+      }
+    ]
+  },
+  "manifest_rows": 1200,
+  "runtime_seconds": 17.856259315041825,
+  "simulator": "minimal_unified_mujoco_kinematic_mjcf",
+  "paper_grade": false
+}

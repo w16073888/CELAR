@@ -1,0 +1,42 @@
+{
+  "decision": "C2_PASS",
+  "c2_pass": true,
+  "semantic_error_ratio": 1.1074914294748979,
+  "execution_ratio": 0.8598484848484849,
+  "summary": [
+    {
+      "method": "celar_bc",
+      "runs": 6,
+      "semantic_mae": 0.2827426145474116,
+      "semantic_mae_ci95_lower": 0.21706289052963257,
+      "semantic_mae_ci95_upper": 0.33955693741639453,
+      "native_mae": 0.16315265744924545,
+      "native_mae_ci95_lower": 0.1268307293454806,
+      "native_mae_ci95_upper": 0.19389752795298895,
+      "executable_rate": 0.6305555555555556,
+      "executable_rate_ci95_lower": 0.4916666666666667,
+      "executable_rate_ci95_upper": 0.7888888888888889,
+      "jerk": 0.04778805002570152,
+      "jerk_ci95_lower": 0.0428250078111887,
+      "jerk_ci95_upper": 0.05311891743913294
+    },
+    {
+      "method": "native_bc",
+      "runs": 6,
+      "semantic_mae": 0.2553000474969546,
+      "semantic_mae_ci95_lower": 0.19701727237552405,
+      "semantic_mae_ci95_upper": 0.30879075328509015,
+      "native_mae": 0.15289265662431717,
+      "native_mae_ci95_lower": 0.11820641905069351,
+      "native_mae_ci95_upper": 0.18445695688327154,
+      "executable_rate": 0.7333333333333334,
+      "executable_rate_ci95_lower": 0.5944444444444444,
+      "executable_rate_ci95_upper": 0.8777777777777778,
+      "jerk": 0.10065974791844685,
+      "jerk_ci95_lower": 0.0803174947698911,
+      "jerk_ci95_upper": 0.11986897885799408
+    }
+  ],
+  "paper_grade": false,
+  "runtime_seconds": 49.62275060000002
+}

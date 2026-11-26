@@ -1,0 +1,24 @@
+{
+  "config": {
+    "pairs_per_task": 100,
+    "render_size": 128,
+    "seed": 20261106,
+    "output_dir": "results/c0_mujoco_v1",
+    "memory_batch_size": 8,
+    "memory_limit_gb": 10.5,
+    "latency_trials": 20,
+    "max_median_latency_ms": 180.0,
+    "max_p95_latency_ms": 300.0
+  },
+  "environment": {
+    "python": "3.8.5 (default, Sep  4 2020, 07:30:14) \n[GCC 7.3.0]",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.10",
+    "torch": "2.4.1",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "cpu_count": 32
+  },
+  "trajectory_manifest_sha256": "8f8be24c550107192d8107e77ff8028112f2f1faf6afc511adf85e91541e059a",
+  "runtime_seconds": 17.856259315041825,
+  "paper_grade": false
+}

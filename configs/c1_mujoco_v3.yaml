@@ -1,0 +1,29 @@
+output_dir: results/c1_mujoco_v3
+c0_data_dir: results/c0_mujoco_v1
+data:
+  chunk_length: 8
+model:
+  hidden_dim: 96
+  latent_dim: 8
+  epochs: 45
+  batch_size: 128
+  learning_rate: 0.002
+  weight_decay: 0.0001
+  align_weight: 0.65
+  cycle_weight: 0.20
+  outcome_weight: 0.20
+  smooth_weight: 0.06
+  usage_weight: 1.8
+  reconstruction_weight: 1.0
+  pair_margin: 0.10
+  bc_epochs: 80
+  bc_batch_size: 128
+  bc_action_weight: 1.5
+  adaptation_steps: 280
+  adaptation_learning_rate: 0.004
+evaluation:
+  seeds: [0, 1, 2]
+  bootstrap_samples: 3000
+  retrieval_candidates: 60
+  shots: [5, 20, 50]
+  executable_semantic_tolerance: 0.34

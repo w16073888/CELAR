@@ -1,0 +1,108 @@
+{
+  "config": {
+    "output_dir": "results/c1_mujoco_v2",
+    "c0_data_dir": "results/c0_mujoco_v1",
+    "data": {
+      "train_tasks": 6,
+      "val_tasks": 2,
+      "test_tasks": 2,
+      "train_episodes_per_task": 18,
+      "val_episodes_per_task": 4,
+      "test_episodes_per_task": 5,
+      "trajectory_length": 24,
+      "chunk_length": 8,
+      "stride": 4,
+      "observation_noise": 0.018,
+      "action_noise": 0.025,
+      "scene_angle_train": 25.0,
+      "scene_angle_test": 110.0,
+      "failure_rate": 0.1
+    },
+    "model": {
+      "hidden_dim": 96,
+      "latent_dim": 8,
+      "epochs": 60,
+      "batch_size": 128,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "align_weight": 0.65,
+      "cycle_weight": 0.2,
+      "outcome_weight": 0.2,
+      "smooth_weight": 0.06,
+      "usage_weight": 0.08,
+      "reconstruction_weight": 1.0,
+      "pair_margin": 0.1,
+      "bc_epochs": 80,
+      "bc_batch_size": 128,
+      "bc_action_weight": 1.5,
+      "adaptation_steps": 280,
+      "adaptation_learning_rate": 0.004
+    },
+    "evaluation": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "bootstrap_samples": 3000,
+      "retrieval_candidates": 60,
+      "shots": [
+        5,
+        20,
+        50
+      ],
+      "executable_semantic_tolerance": 0.34
+    },
+    "rl": {
+      "training_steps": 24576,
+      "rollout_envs": 8,
+      "rollout_steps": 64,
+      "update_epochs": 4,
+      "minibatch_size": 128,
+      "learning_rate": 0.0003,
+      "gamma": 0.98,
+      "gae_lambda": 0.94,
+      "clip_epsilon": 0.2,
+      "entropy_coef": 0.003,
+      "value_coef": 0.5,
+      "max_episode_steps": 36,
+      "eval_episodes": 24,
+      "eval_interval": 4096
+    }
+  },
+  "c0_manifest_rows": 1200,
+  "source_sha256": "7a825b69120ce4ce392a8a5e294cf4bca9441cabaa6a77ae668067c02de10f47",
+  "checkpoint_sha256": {
+    "independent_ae/seed_0": "339ffef11e21974c02213d49291a40d2034c584cefde414fd85a5b23ecc6dbe6",
+    "shared_ae/seed_0": "56c2ac72705f58c44e7e31a8a93d4fdc144b1d5ea56b297f6d229b2f70d3cc7b",
+    "celar_no_align/seed_0": "ac131de667437bf20a6c14375c347e8715a46639c940da4f52cecdbe9c51497a",
+    "celar_no_cycle/seed_0": "092b12310f2a3e8e7110acd79cf3e923578f847d879a1ee8212380943af53c07",
+    "celar_no_outcome/seed_0": "38eae975dbef65a1649fa44a4755457214b98472966cb47bdbbc499a4fe859d4",
+    "celar_shuffled/seed_0": "fd37c087c7a626ab592833c2a752f60315d8ea4b55ba24908ce6521eb4cbfd77",
+    "celar/seed_0": "54ecfe23e9be7acb212e3ab0bbeab2c557c7018bccc9480295d3e890ab4b4f6f",
+    "independent_ae/seed_1": "1c14e4fedefcd065ba917f285041bf0741542fb1e61d50e7929eaf3535d69570",
+    "shared_ae/seed_1": "ada38e28a50d6ae4cae41d2b8f4613ad2cc902858f40404e45ff0a1a14c6d1f1",
+    "celar_no_align/seed_1": "dad4f9affd99e62293a3c51f72e1859b2426c33c6c8970b327a301ac71016f90",
+    "celar_no_cycle/seed_1": "62f3d90f1fda9c803a92c1be0bd18d0384a4c8b6e8733f58d17b774fbc065058",
+    "celar_no_outcome/seed_1": "e6ff040403541b170fa8b8491dc4ff3fb3148f532196bc1039e3fe1c387d6182",
+    "celar_shuffled/seed_1": "d3bb5cb5374900adfa337ee8cea2de00de3588f368d3bfbc98ed4daa0e169687",
+    "celar/seed_1": "cd41313a75e5a8cbec2fb2693016380f10c0d550451d87b4f6acb66f84cdcf57",
+    "independent_ae/seed_2": "ad7e98b5bc7733e7974dfa426165f231f5e98193f7c0f3e2adae1b8c15ef514e",
+    "shared_ae/seed_2": "1caed830cf48f2175969877c839413fb54cbfad774ee9900be421c787caf749f",
+    "celar_no_align/seed_2": "05621d548122bb03cc7a946687c5d57caef263daf9c851e4c81ae32050e01c37",
+    "celar_no_cycle/seed_2": "913d449b53c18bbadd35fc94f0c5e26a0b0f21a879f87e7e00dfa207f00b851b",
+    "celar_no_outcome/seed_2": "2e228c5c811ecedeaf8cdc7d047328cbda6170e111e0c11ec840dfc6b36dfb3c",
+    "celar_shuffled/seed_2": "71df9d6dffb153b39d2a7f5f696b3914b16948c301362cfd67115cd00b293836",
+    "celar/seed_2": "04f844f6fe03d99c9fa6efe4a3184442f22535cbd139e1d40c5913b7c9bfd289"
+  },
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "cpu_count": 8
+  },
+  "runtime_seconds": 198.2154657000001,
+  "scope": "formal_c0_mujoco_three_embodiment_c1",
+  "paper_grade": false
+}

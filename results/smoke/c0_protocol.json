@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "pair_overlap_count": 0,
+  "task_overlap_count": 0,
+  "split_counts": {
+    "train_samples": 144,
+    "val_samples": 12,
+    "test_samples": 24,
+    "train_pairs": 48,
+    "val_pairs": 4,
+    "test_pairs": 8,
+    "train_tasks": 4,
+    "val_tasks": 1,
+    "test_tasks": 1
+  },
+  "body_counts": {
+    "train": {
+      "franka_panda": 48,
+      "ur5e": 48,
+      "sawyer": 48
+    },
+    "val": {
+      "franka_panda": 4,
+      "ur5e": 4,
+      "sawyer": 4
+    },
+    "test": {
+      "franka_panda": 8,
+      "ur5e": 8,
+      "sawyer": 8
+    }
+  },
+  "by_seed": {
+    "0": {
+      "passed": true,
+      "pair_overlap_count": 0,
+      "task_overlap_count": 0,
+      "split_counts": {
+        "train_samples": 144,
+        "val_samples": 12,
+        "test_samples": 24,
+        "train_pairs": 48,
+        "val_pairs": 4,
+        "test_pairs": 8,
+        "train_tasks": 4,
+        "val_tasks": 1,
+        "test_tasks": 1
+      },
+      "body_counts": {
+        "train": {
+          "franka_panda": 48,
+          "ur5e": 48,
+          "sawyer": 48
+        },
+        "val": {
+          "franka_panda": 4,
+          "ur5e": 4,
+          "sawyer": 4
+        },
+        "test": {
+          "franka_panda": 8,
+          "ur5e": 8,
+          "sawyer": 8
+        }
+      },
+      "dimensions": {
+        "context": [
+          42
+        ],
+        "native_action": [
+          [
+            4,
+            8
+          ]
+        ],
+        "semantic_action": [
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "chunk_length": 4,
+      "stride": 4
+    }
+  },
+  "expert_action_audit": {
+    "0": {
+      "passed": true,
+      "bodies": [
+        {
+          "body_index": 0,
+          "morphology": "franka_panda",
+          "action_dim": 7,
+          "samples": 8,
+          "expert_executable_rate": 1.0,
+          "expert_semantic_mae": 0.04141447693109512,
+          "maximum_step": 0.5214765071868896,
+          "velocity_limit": 0.78
+        },
+        {
+          "body_index": 1,
+          "morphology": "ur5e",
+          "action_dim": 6,
+          "samples": 8,
+          "expert_executable_rate": 1.0,
+          "expert_semantic_mae": 0.06188366562128067,
+          "maximum_step": 0.47564756870269775,
+          "velocity_limit": 0.84
+        },
+        {
+          "body_index": 2,
+          "morphology": "sawyer",
+          "action_dim": 7,
+          "samples": 8,
+          "expert_executable_rate": 1.0,
+          "expert_semantic_mae": 0.04578547179698944,
+          "maximum_step": 0.5351497530937195,
+          "velocity_limit": 0.72
+        }
+      ]
+    }
+  },
+  "bodies": [
+    {
+      "body_index": 0,
+      "morphology": "franka_panda",
+      "action_dim": 7,
+      "samples": 8,
+      "expert_executable_rate": 1.0,
+      "expert_semantic_mae": 0.04141447693109512,
+      "maximum_step": 0.5214765071868896,
+      "velocity_limit": 0.78
+    },
+    {
+      "body_index": 1,
+      "morphology": "ur5e",
+      "action_dim": 6,
+      "samples": 8,
+      "expert_executable_rate": 1.0,
+      "expert_semantic_mae": 0.06188366562128067,
+      "maximum_step": 0.47564756870269775,
+      "velocity_limit": 0.84
+    },
+    {
+      "body_index": 2,
+      "morphology": "sawyer",
+      "action_dim": 7,
+      "samples": 8,
+      "expert_executable_rate": 1.0,
+      "expert_semantic_mae": 0.04578547179698944,
+      "maximum_step": 0.5351497530937195,
+      "velocity_limit": 0.72
+    }
+  ]
+}

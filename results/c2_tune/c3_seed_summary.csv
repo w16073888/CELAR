@@ -1,0 +1,4 @@
+seed,method,final_success,steps_to_50,steps_to_80,runtime_seconds
+0,native_ppo,0.0,1024.0,1024.0,0.7449712000002364
+0,shared_ppo,0.0,1024.0,1024.0,1.3478319000000738
+0,celar_ppo,0.0,1024.0,1024.0,1.312019599999985

@@ -1,0 +1,72 @@
+{
+  "config": {
+    "output_dir": "results/smoke",
+    "data": {
+      "train_tasks": 4,
+      "val_tasks": 1,
+      "test_tasks": 1,
+      "train_episodes_per_task": 3,
+      "val_episodes_per_task": 1,
+      "test_episodes_per_task": 2,
+      "trajectory_length": 16,
+      "chunk_length": 4,
+      "stride": 4,
+      "observation_noise": 0.018,
+      "action_noise": 0.025,
+      "scene_angle_train": 25.0,
+      "scene_angle_test": 110.0,
+      "failure_rate": 0.1
+    },
+    "model": {
+      "hidden_dim": 48,
+      "latent_dim": 8,
+      "epochs": 8,
+      "batch_size": 64,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "align_weight": 0.65,
+      "cycle_weight": 0.2,
+      "outcome_weight": 0.2,
+      "smooth_weight": 0.06,
+      "reconstruction_weight": 1.0,
+      "pair_margin": 0.1,
+      "bc_epochs": 20,
+      "bc_batch_size": 64,
+      "adaptation_steps": 60,
+      "adaptation_learning_rate": 0.004
+    },
+    "evaluation": {
+      "seeds": [
+        0
+      ],
+      "bootstrap_samples": 200,
+      "retrieval_candidates": 16,
+      "shots": [
+        5
+      ],
+      "executable_semantic_tolerance": 0.34
+    }
+  },
+  "source_sha256": "b0a9df24b2df2134ac0e690d4948d4635a1276ae9b6345ff506a6d3e5b3e7b94",
+  "checkpoint_sha256": {
+    "c1/independent_ae/seed_0": "69fd28e91ff6e8f8c0c06c70c52c1678e631b1ca371742ea2d5648f7b4573708",
+    "c1/shared_ae/seed_0": "61cd35f954d87da87c05f98ef0776eeb51ec31c27a2c9eded4fe04f2ad2d2456",
+    "c1/celar_no_align/seed_0": "f7bf3383c94a84ab367f60fd8de27442741512c5e32a767e093d38a60abb7c99",
+    "c1/celar_no_cycle/seed_0": "be04e65d18fdc6ff92637aed7ebd3fce9369b91b0628577036cde0354c13ab21",
+    "c1/celar_no_outcome/seed_0": "7452f0b550541e8514b1bbcf714865e0bc8b072b252af67e5add97e56cd9afc0",
+    "c1/celar_shuffled/seed_0": "263373d0cdb0e3b7161347f9342647a86cd87725236b376484fa1d5e29c87ca9",
+    "c1/celar/seed_0": "b9239e7a3b086ec07bbed98f9e44b001b5d9305fad7a974154373662a2882d92",
+    "c2/seed_0": "11a500527d7b62cc4f2402ac1f5a98045ce78959aa3c67c39cd207d69248742a",
+    "c4/seed_0": "7e4d3a590c1e3e361f41c754d71325734045ddf823ac73d67c71ade5ee0b825c"
+  },
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "cpu_count": 8
+  },
+  "total_runtime_seconds": 3.468215099999952,
+  "scope": "controlled_cross_embodiment_kinematic_proxy",
+  "paper_grade": false
+}

@@ -1,0 +1,86 @@
+{
+  "config": {
+    "output_dir": "results/c2_tune",
+    "data": {
+      "train_tasks": 6,
+      "val_tasks": 2,
+      "test_tasks": 2,
+      "train_episodes_per_task": 18,
+      "val_episodes_per_task": 4,
+      "test_episodes_per_task": 5,
+      "trajectory_length": 24,
+      "chunk_length": 4,
+      "stride": 4,
+      "observation_noise": 0.018,
+      "action_noise": 0.025,
+      "scene_angle_train": 25.0,
+      "scene_angle_test": 110.0,
+      "failure_rate": 0.1
+    },
+    "model": {
+      "hidden_dim": 96,
+      "latent_dim": 8,
+      "epochs": 45,
+      "batch_size": 128,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "align_weight": 0.65,
+      "cycle_weight": 0.2,
+      "outcome_weight": 0.2,
+      "smooth_weight": 0.06,
+      "reconstruction_weight": 1.0,
+      "pair_margin": 0.1,
+      "bc_epochs": 800,
+      "bc_batch_size": 128,
+      "bc_action_weight": 3.0,
+      "adaptation_steps": 280,
+      "adaptation_learning_rate": 0.004
+    },
+    "evaluation": {
+      "seeds": [
+        0
+      ],
+      "bootstrap_samples": 500,
+      "retrieval_candidates": 64,
+      "shots": [
+        5
+      ],
+      "executable_semantic_tolerance": 0.34
+    },
+    "rl": {
+      "training_steps": 1024,
+      "rollout_envs": 4,
+      "rollout_steps": 32,
+      "update_epochs": 1,
+      "minibatch_size": 64,
+      "learning_rate": 0.0003,
+      "gamma": 0.98,
+      "gae_lambda": 0.94,
+      "clip_epsilon": 0.2,
+      "entropy_coef": 0.003,
+      "value_coef": 0.5,
+      "max_episode_steps": 36,
+      "eval_episodes": 8,
+      "eval_interval": 512
+    }
+  },
+  "source_sha256": "9061edce974cb71f37d1a417923f836b94d3f9a161707b5c5c90c68461ec3f90",
+  "checkpoint_sha256": {
+    "latent/shared_ae/0": "73482dd5adfd80671e7ff0fa2804fbc4eef953a3fe8270c8b30bedbe38a4fe29",
+    "latent/celar/0": "3fda2e02d8e350f56557a87683704883f537a5875fe206dc3316567a22408649",
+    "bc/0": "8fc894b5d8c79cd9f4f29e5118602bbde7736027cdd7a854350d80d8b478da00",
+    "ppo/native_ppo/0": "ccaa1143a025bead27bb58ddee186cec8d4b5534bd15ddffed34bce1203fd6b6",
+    "ppo/shared_ppo/0": "60609f1aa068a810d474b9f94920ccab5830a2e6a24f93cda1db9de93447f033",
+    "ppo/celar_ppo/0": "630b3a66a6dd3bade381823ce33280968a40743af019cfbb5433d0e41523a4d8"
+  },
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "cpu_count": 8
+  },
+  "total_runtime_seconds": 25.253797700000177,
+  "scope": "controlled_celar_c2_c3_proxy",
+  "paper_grade": false
+}

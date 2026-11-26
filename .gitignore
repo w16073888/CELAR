@@ -1,0 +1,24 @@
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+pytest-cache-files-*/
+
+# Local dependencies and transfer bundles
+.deps/
+*.tar.gz
+*.zip
+*.bundle
+
+# Generated experiment binaries and media
+**/checkpoints/
+*.pt
+*.pth
+*.npz
+*.npy
+*.png
+*.jpg
+*.jpeg
+
+# Large simulator payloads; manifests and reports remain tracked
+results/c0_mujoco_v1/trajectories/

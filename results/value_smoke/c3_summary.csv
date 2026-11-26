@@ -1,0 +1,4 @@
+method,runs,final_success,final_success_ci95_lower,final_success_ci95_upper,steps_to_50,steps_to_50_ci95_lower,steps_to_50_ci95_upper,steps_to_80,steps_to_80_ci95_lower,steps_to_80_ci95_upper
+celar_ppo,1,0.0,0.0,0.0,1024.0,1024.0,1024.0,1024.0,1024.0,1024.0
+native_ppo,1,0.0,0.0,0.0,1024.0,1024.0,1024.0,1024.0,1024.0,1024.0
+shared_ppo,1,0.0,0.0,0.0,1024.0,1024.0,1024.0,1024.0,1024.0,1024.0

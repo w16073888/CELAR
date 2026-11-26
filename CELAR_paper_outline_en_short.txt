@@ -1,0 +1,70 @@
+CELAR: Cross-Embodiment Latent Action Reinforcement Learning with Executable Robot-Specific Decoders
+
+Abstract
+
+Robot manipulation policies are usually tied to a single embodiment because different arms have different action dimensions, kinematics, limits, and control conventions. This paper studies whether a compact action representation can be shared across robots while each robot retains an executable controller. We propose CELAR, a cross-embodiment latent action framework that learns a shared action space from paired manipulation trajectories and decodes latent actions through robot-specific safety-constrained decoders. CELAR combines native-action reconstruction, cross-embodiment alignment, cycle consistency, progress consistency, and temporal smoothness. We evaluate the method on three robot arms, Panda, UR5e, and Sawyer, across pick, place, open-drawer, and push tasks. In a controlled pilot, CELAR improves similar-action retrieval from 0.550 to 0.911 over a shared action autoencoder. Under an equal online-step budget, CELAR reaches 71.5% final success compared with 37.5% for native-action PPO, while a decoder-only adaptation experiment reduces 5-shot action error by 26% for an unseen robot. A MuJoCo C0 study further confirms paired data generation, RGB-D alignment, safe action execution, and low-cost batch training. These results support the value of separating shared action semantics from robot-specific execution, while leaving vendor-grade multi-robot and real-world validation for future work.
+
+1. Introduction
+
+Most robot policies are designed for one robot arm. Extending them to another arm is difficult because joint counts, action ordering, limits, and dynamics differ. Shared visual or language encoders do not solve this control problem: two robots may observe the same scene but require incompatible low-level actions.
+
+The paper asks whether action semantics can be shared while execution remains embodiment-specific. The central hypothesis is that semantically similar actions should occupy nearby positions in a shared latent space, while robot-specific decoders convert those latents into safe native commands.
+
+The expected contribution is not a universal controller. Instead, CELAR provides a shared action interface:
+
+1. pairs trajectories by task, scene, initial state, and goal;
+2. learns a compact latent action from action chunks and observations;
+3. uses one decoder per robot to preserve native control;
+4. applies joint, velocity, and gripper safety constraints;
+5. reuses the latent interface for reinforcement learning and few-shot decoder adaptation.
+
+The introduction should end with three contributions: cross-embodiment action alignment, an executable robot-specific action interface, and evidence of improved online learning efficiency under matched budgets.
+
+2. Method
+
+Each robot k has its own native action dimension and action chunk length. For a paired task phase, the encoder maps the observation, action chunk, and morphology descriptor into an 8-dimensional latent action. The latent is decoded by a robot-specific decoder. Safety projection then enforces joint limits, velocity limits, workspace bounds, gripper range, and action smoothness.
+
+The training objective contains five terms. Native reconstruction ensures that the decoder can produce usable actions. Cross-embodiment alignment pulls paired semantic actions together. Cycle consistency decodes a latent through one robot and re-encodes it through another. Progress consistency encourages similar changes in task progress. Smoothness discourages abrupt latent changes around contact phases.
+
+For imitation learning, the high-level model predicts a latent action while the decoder remains frozen. A decoder-aware reconstruction term is used because latent distances alone do not ensure physical action quality.
+
+For reinforcement learning, PPO acts in latent space. The decoder and most pretrained components remain frozen. The first experiment should compare native-action PPO, a shared decoder baseline, and full CELAR under equal environment steps, evaluation episodes, and random seeds.
+
+3. Data and Experimental Setup
+
+Use Panda, UR5e, and Sawyer with four task families: pick, place, open-drawer, and push. Each paired sample shares task ID, scene ID, initial object state, and goal, while native actions remain robot-specific. RGB-D observations are rendered at 128×128. Split data by task instance, scene, and pair to prevent leakage.
+
+Keep both successful and failed demonstrations, with a small set of controlled perturbations. Record native actions, EEF pose, joint state, gripper action, progress, success, contacts, and safety flags.
+
+The main comparisons are:
+
+1. independent per-robot action autoencoders;
+2. shared native-action autoencoders with robot IDs;
+3. CELAR without cross-embodiment alignment;
+4. full CELAR.
+
+For online RL, compare native-action PPO and CELAR PPO. For adaptation, hold out one robot and train only a new decoder from 5, 20, and 50 demonstrations.
+
+4. Results
+
+Report the main findings in three blocks.
+
+First, show that CELAR aligns action semantics. In the controlled pilot, similar-action retrieval reaches 0.911 for CELAR versus 0.550 for a shared autoencoder, while decoded actions remain executable.
+
+Second, show that the action interface is compatible with policy learning. In the equal-budget PPO pilot, CELAR reaches 71.5% final success compared with 37.5% for native-action PPO and 53.5% for a shared-decoder baseline. Report paired confidence intervals and per-task directions.
+
+Third, show that an unseen robot can adapt with few demonstrations. The decoder-only experiment reduces 5-shot semantic action error by about 26%. Clearly separate this action-interface result from closed-loop policy transfer.
+
+The MuJoCo C0 study should appear as implementation evidence rather than the main scientific contribution: 1,200 paired trajectories, no split leakage, zero post-safety violations, sub-pixel RGB-D alignment, and batch-8 memory below the deployment limit.
+
+5. Discussion and Limitations
+
+The results suggest that sharing action semantics without sharing native execution is a useful design principle. The method may reduce duplicated policy learning across robot families and provide a practical path to few-shot decoder adaptation.
+
+The current evidence is preliminary. The online gains come from a controlled proxy, and the robot arms in the C0 environment are simplified kinematic models rather than vendor-grade dynamics. The end-to-end adaptation of a frozen policy to a new robot also remains unresolved.
+
+Before submission, the key experiment is a vendor-grade MuJoCo or Robosuite replication with Panda, UR5e, and Sawyer, three seeds, and four tasks. The main claim should be retained only if CELAR preserves executable actions and improves success or sample efficiency in that setting.
+
+6. Conclusion
+
+CELAR separates a shared latent action space from robot-specific executable decoders. Pilot results support cross-embodiment action alignment, a usable latent control interface, improved equal-budget PPO performance, and few-shot decoder adaptation. The next stage should test whether these benefits survive realistic robot dynamics and stricter multi-task evaluation.

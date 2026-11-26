@@ -1,0 +1,16 @@
+{
+  "source_sha256": {
+    "pilot": "2b58f82be589dc66435d56dc27a8a6e7e90503b65554c540eb86d865c0cc04f8",
+    "c2_long": "6deb0d1751705f26503a79d062d19160039329e1cb09fa1335d95f30a9fff887",
+    "c3": "a17b63696f44b5142ea79edf127266eb660b00c6d443cc849babfc742c0f8543",
+    "c3_group": "591643956c86b0b96c66a3b0f7a2e136de29778478a54fd2c21c7ddc3eec416e"
+  },
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false
+  },
+  "runtime_seconds": 0.019479799999771785,
+  "paper_grade": false
+}
